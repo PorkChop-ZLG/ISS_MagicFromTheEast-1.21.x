@@ -28,6 +28,10 @@ public class MFTEEnchantments {
             ResourceLocation.fromNamespaceAndPath(ISS_MagicFromTheEast.MOD_ID, "wisely_will"));
     public static final ResourceKey<Enchantment> INNER_IMPACT = ResourceKey.create(Registries.ENCHANTMENT,
             ResourceLocation.fromNamespaceAndPath(ISS_MagicFromTheEast.MOD_ID, "inner_impact"));
+    public static final ResourceKey<Enchantment> EXPANDING = ResourceKey.create(Registries.ENCHANTMENT,
+            ResourceLocation.fromNamespaceAndPath(ISS_MagicFromTheEast.MOD_ID, "expanding"));
+//    public static final ResourceKey<Enchantment> BARRAGE = ResourceKey.create(Registries.ENCHANTMENT,
+//            ResourceLocation.fromNamespaceAndPath(ISS_MagicFromTheEast.MOD_ID, "barrage"));
 
     public static void bootstrap(BootstrapContext<Enchantment> context) {
         var enchantments = context.lookup(Registries.ENCHANTMENT);
@@ -88,27 +92,41 @@ public class MFTEEnchantments {
         register(
                 context, INNER_IMPACT, Enchantment.enchantment(Enchantment.definition(
                         items.getOrThrow(MFTETags.SOUL_MELEE_WEAPON),
-                        10,
-                        5,
-                        Enchantment.dynamicCost(4, 12),
-                        Enchantment.dynamicCost(20, 12),
-                        1,
-                        EquipmentSlotGroup.MAINHAND))
-                        .exclusiveWith(enchantments.getOrThrow(EnchantmentTags.DAMAGE_EXCLUSIVE))
+                                10,
+                                5,
+                                Enchantment.dynamicCost(4, 12),
+                                Enchantment.dynamicCost(20, 12),
+                                1,
+                                EquipmentSlotGroup.MAINHAND))
+                            .exclusiveWith(enchantments.getOrThrow(EnchantmentTags.DAMAGE_EXCLUSIVE))
                         .withEffect(MFTEDataComponentRegistries.SOUL_DAMAGE.get(),
                                 new AddValue(LevelBasedValue.perLevel(1)))
         );
+        register(
+                context, EXPANDING, Enchantment.enchantment(Enchantment.definition(
+                        items.getOrThrow(MFTETags.AMMO_LOAD_WEAPON),
+                                10,
+                                5,
+                                Enchantment.dynamicCost(5, 10),
+                                Enchantment.dynamicCost(15, 10),
+                                0,
+                                EquipmentSlotGroup.MAINHAND))
+                        .withEffect(EnchantmentEffectComponents.AMMO_USE,
+                                new AddValue(LevelBasedValue.perLevel(1)))
+        );
+        //We will use this enchantment for a projectile weapon in the future
 //        register(
-//                context, EXPANDING, Enchantment.enchantment(Enchantment.definition(
-//                        items.getOrThrow(MFTETags.REPEATING_CROSSBOW),
-//                        10,
-//                        5,
-//                        Enchantment.dynamicCost(5, 10),
-//                        Enchantment.dynamicCost(15, 10),
-//                        0,
-//                        EquipmentSlotGroup.MAINHAND))
-//                        .withEffect(EnchantmentEffectComponents.AMMO_USE,
-//                                new AddValue(LevelBasedValue.perLevel(1)))
+//                context, BARRAGE, Enchantment.enchantment(Enchantment.definition(
+//                                items.getOrThrow(MFTETags.AMMO_LOAD_WEAPON),
+//                                2,
+//                                1,
+//                                Enchantment.constantCost(25),
+//                                Enchantment.constantCost(50),
+//                                6,
+//                                EquipmentSlotGroup.MAINHAND))
+//                            .exclusiveWith(enchantments.getOrThrow(MFTEEnchantmentTags.REPEATING_CROSSBOW_EXCLUSIVE))
+//                        .withEffect(MFTEDataComponentRegistries.BARRAGE_SHOT.get(),
+//                                new AddValue(LevelBasedValue.perLevel(3.0F)))
 //        );
     }
 

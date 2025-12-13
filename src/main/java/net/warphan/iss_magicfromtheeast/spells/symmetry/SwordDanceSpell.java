@@ -73,6 +73,9 @@ public class SwordDanceSpell extends AbstractSpell {
             motion = motion.yRot(offset * i * Mth.DEG_TO_RAD);
 
             JadeSword jadeSword = new JadeSword(level, entity);
+            if (i % 3 == 0) {
+                jadeSword.setSilent(true);
+            }
             jadeSword.setDamage(getSpellPower((spellLevel), entity));
             jadeSword.setWaitTimer(120);
             jadeSword.getSpeed();

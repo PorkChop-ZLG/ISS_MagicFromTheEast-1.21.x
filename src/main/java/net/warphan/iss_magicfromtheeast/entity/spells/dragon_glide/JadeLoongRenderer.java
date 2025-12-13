@@ -3,15 +3,18 @@ package net.warphan.iss_magicfromtheeast.entity.spells.dragon_glide;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import io.redspace.ironsspellbooks.api.util.Utils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.warphan.iss_magicfromtheeast.ISS_MagicFromTheEast;
+import net.warphan.iss_magicfromtheeast.registries.MFTESchoolRegistries;
 import org.joml.Vector3d;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.cache.object.GeoBone;
@@ -52,7 +55,7 @@ public class JadeLoongRenderer extends GeoEntityRenderer<JadeLoong> {
         anchor.ifPresent((bone) ->
         {
             Vector3d pos = bone.getWorldPosition();
-                level.addParticle(ParticleTypes.SCRAPE, pos.x, pos.y, pos.z, 0, 0, 0);
+                level.addParticle(new DustParticleOptions(MFTESchoolRegistries.SYMMETRY.get().getTargetingColor(), 2.5f), pos.x, pos.y, pos.z, 0, 0, 0);
         });
         super.render(jadeLoong, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }

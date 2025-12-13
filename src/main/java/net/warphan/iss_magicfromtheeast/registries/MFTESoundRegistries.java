@@ -18,21 +18,25 @@ public class MFTESoundRegistries{
     public static DeferredHolder<SoundEvent, SoundEvent> SYMMETRY_CAST = registerSoundEvent("cast.generic.symmetry");
     public static DeferredHolder<SoundEvent, SoundEvent> SPIRIT_CAST = registerSoundEvent("cast.generic.spirit");
     public static DeferredHolder<SoundEvent, SoundEvent> DUNE_CAST = registerSoundEvent("cast.generic.dune");
-    public static DeferredHolder<SoundEvent, SoundEvent> SPROING = registerSoundEvent("cast.generic.sproing");
+
     public static DeferredHolder<SoundEvent, SoundEvent> LOONG_CAST = registerSoundEvent("cast.generic.loong");
-    public static DeferredHolder<SoundEvent, SoundEvent> FORCE_PULLING = registerSoundEvent("cast.generic.force_pulling");
-    public static DeferredHolder<SoundEvent, SoundEvent> PUSH_BURST = registerSoundEvent("cast.generic.push_burst");
     public static DeferredHolder<SoundEvent, SoundEvent> JADE_SWORD_IMPACT = registerSoundEvent("cast.generic.jade_sword_impact");
+    public static DeferredHolder<SoundEvent, SoundEvent> JADE_DAO_IMPACT = registerSoundEvent("cast.generic.jade_dao_impact");
+    public static DeferredHolder<SoundEvent, SoundEvent> JADE_DEFLECT = registerSoundEvent("cast.generic.jade_deflect");
+    public static DeferredHolder<SoundEvent, SoundEvent> JADE_SLASH = registerSoundEvent("cast.generic.jade_slash");
+    public static DeferredHolder<SoundEvent, SoundEvent> JADE_EMERGE = registerSoundEvent("cast.generic.jade_emerge");
     public static DeferredHolder<SoundEvent, SoundEvent> SOUL_CAST = registerSoundEvent("cast.generic.soul_cast");
-    public static DeferredHolder<SoundEvent, SoundEvent> BONE_AMBIENT = registerSoundEvent("cast.generic.bone_ambient");
     public static DeferredHolder<SoundEvent, SoundEvent> BONE_HURT = registerSoundEvent("cast.generic.bone_hit");
     public static DeferredHolder<SoundEvent, SoundEvent> BONE_SLAM = registerSoundEvent("cast.generic.bone_slam");
     public static DeferredHolder<SoundEvent, SoundEvent> KATANA_WIND_UP = registerSoundEvent("cast.generic.katana_wind_up");
     public static DeferredHolder<SoundEvent, SoundEvent> SWORD_STRIKE = registerSoundEvent("cast.generic.sword_strike");
     public static DeferredHolder<SoundEvent, SoundEvent> DEATH_BELL = registerSoundEvent("cast.generic.death_bell");
+    public static DeferredHolder<SoundEvent, SoundEvent> MAGIC_PROJECTILE_THROW= registerSoundEvent("cast.generic.projectile_throw");
+    public static DeferredHolder<SoundEvent, SoundEvent> SPIRIT_EXTRACTING = registerSoundEvent("cast.generic.soul_challenging");
     public static DeferredHolder<SoundEvent, SoundEvent> SPIRIT_ARROW_SHOT = registerSoundEvent("cast.generic.spirit_arrow_shot");
     public static DeferredHolder<SoundEvent, SoundEvent> PROJECTILE_LOAD = registerSoundEvent("cast.generic.projectile_loading");
     public static DeferredHolder<SoundEvent, SoundEvent> SPIRIT_INVOKING = registerSoundEvent("cast.generic.soul_rise");
+    public static DeferredHolder<SoundEvent, SoundEvent> SOUL_CRUSHED = registerSoundEvent("cast.generic.soul_crushed");
 
     //JADE EXECUTIONER
     public static DeferredHolder<SoundEvent, SoundEvent> AXE_CHOP = registerSoundEvent("executioner.generic.axe_chop");
@@ -40,7 +44,6 @@ public class MFTESoundRegistries{
     public static DeferredHolder<SoundEvent, SoundEvent> EXECUTIONER_AMBIENT = registerSoundEvent("executioner.generic.executioner_ambient");
     public static DeferredHolder<SoundEvent, SoundEvent> EXECUTIONER_HURT = registerSoundEvent("executioner.generic.executioner_hurt");
     public static DeferredHolder<SoundEvent, SoundEvent> ROAR = registerSoundEvent("executioner.generic.roar");
-    public static DeferredHolder<SoundEvent, SoundEvent> SHIELD_BASH = registerSoundEvent("executioner.generic.shield_bash");
     public static DeferredHolder<SoundEvent, SoundEvent> EXECUTIONER_SHOWDOWN = registerSoundEvent("executioner.generic.showdown");
 
     //JADE SENTINEL

@@ -3,6 +3,7 @@ package net.warphan.iss_magicfromtheeast.item.curios;
 import io.redspace.ironsspellbooks.api.item.curios.AffinityData;
 import io.redspace.ironsspellbooks.api.spells.IPresetSpellContainer;
 import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
+import io.redspace.ironsspellbooks.item.curios.SimpleDescriptiveCurio;
 import io.redspace.ironsspellbooks.registries.ComponentRegistry;
 import io.redspace.ironsspellbooks.util.TooltipsUtils;
 import net.minecraft.network.chat.Component;
@@ -16,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Map;
 
-public class RustedCoinsSword extends CurioBaseItem implements IPresetSpellContainer {
+public class RustedCoinsSword extends SimpleDescriptiveCurio implements IPresetSpellContainer {
     public RustedCoinsSword(Item.Properties properties) {
         super(properties.rarity(MFTERarity.BLOODFUL_RARITY_PROXY.getValue()));
     }

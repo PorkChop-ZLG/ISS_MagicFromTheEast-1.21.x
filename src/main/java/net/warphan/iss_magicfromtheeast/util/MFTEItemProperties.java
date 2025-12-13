@@ -2,14 +2,17 @@ package net.warphan.iss_magicfromtheeast.util;
 
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.warphan.iss_magicfromtheeast.item.weapons.RepeatingCrossbow;
 import net.warphan.iss_magicfromtheeast.registries.MFTEItemRegistries;
 
+@OnlyIn(Dist.CLIENT)
 public class MFTEItemProperties {
     public static void addCustomItemProperties() {
         makeCustomBow(MFTEItemRegistries.SOULPIERCER.get());
-        makeCustomCrossbow(MFTEItemRegistries.REPEATING_CROSSBOW.get());
+        makeRepeatingCrossbow(MFTEItemRegistries.REPEATING_CROSSBOW.get());
     }
 
     private static void makeCustomBow(Item item) {
@@ -27,23 +30,19 @@ public class MFTEItemProperties {
         );
     }
 
-    private static void makeCustomCrossbow(Item item) {
-        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("pull"), (p_351682_, p_351683_, p_351684_, p_351685_) -> {
-            if (p_351684_ == null) {
+    private static void makeRepeatingCrossbow(Item item) {
+        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("pull"), (itemStack, clientLevel, livingEntity, i) -> {
+            if (livingEntity == null) {
                 return 0.0F;
             } else {
-                return CrossbowItem.isCharged(p_351682_) ? 0.0F : (float)(p_351682_.getUseDuration(p_351684_) - p_351684_.getUseItemRemainingTicks()) / (float)CrossbowItem.getChargeDuration(p_351682_, p_351684_);
+                return RepeatingCrossbow.isCharged(itemStack) ? 0.0F : (float)(itemStack.getUseDuration(livingEntity) - livingEntity.getUseItemRemainingTicks()) / (float)RepeatingCrossbow.getChargeDuration(itemStack, livingEntity);
             }
         });
-        ItemProperties.register(item,
-                ResourceLocation.withDefaultNamespace("pulling"),
-                (p_174605_, p_174606_, p_174607_, p_174608_) -> {
-            return p_174607_ != null && p_174607_.isUsingItem() && p_174607_.getUseItem() == p_174605_ && !CrossbowItem.isCharged(p_174605_) ? 1.0F : 0.0F;
+        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("pulling"), (itemStack, level, livingEntity, i) -> {
+            return livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack && !RepeatingCrossbow.isCharged(itemStack) ? 1.0F : 0.0F;
         });
-        ItemProperties.register(item,
-                ResourceLocation.withDefaultNamespace("charged"),
-                (p_275891_, p_275892_, p_275893_, p_275894_) -> {
-            return CrossbowItem.isCharged(p_275891_) ? 1.0F : 0.0F;
+        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("charged"), (itemStack, level, livingEntity, i) -> {
+            return RepeatingCrossbow.isCharged(itemStack) ? 1.0F : 0.0F;
         });
     }
 }

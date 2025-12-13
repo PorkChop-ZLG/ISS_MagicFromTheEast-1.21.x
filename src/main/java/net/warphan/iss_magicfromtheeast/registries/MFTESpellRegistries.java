@@ -23,18 +23,18 @@ public class MFTESpellRegistries extends SpellRegistry {
 
     //SYMMETRY SPELLS
 //    public static final Supplier<AbstractSpell> LAUNCH_SPELL = registerSpell(new LaunchSpell());
-//    public static final Supplier<AbstractSpell> FORCE_SWORD_SPELL = registerSpell(new ForceSwordSpell());
-    public static final Supplier<AbstractSpell> QIGONG_CONTROLLING_SPELL = registerSpell(new QigongControllingSpell());
+//    public static final Supplier<AbstractSpell> QIGONG_CONTROLLING_SPELL = registerSpell(new QigongControllingSpell());
     public static final Supplier<AbstractSpell> SWORD_DANCE_SPELL = registerSpell(new SwordDanceSpell());
     public static final Supplier<AbstractSpell> BAGUA_ARRAY_CIRCLE_SPELL = registerSpell(new BaguaArrayCircleSpell());
     public static final Supplier<AbstractSpell> DRAGON_GLIDE_SPELL = registerSpell(new DragonGlideSpell());
     public static final Supplier<AbstractSpell> JADE_JUDGEMENT_SPELL = registerSpell(new JadeJudgementSpell());
     public static final Supplier<AbstractSpell> JIANGSHI_INVOKE_SPELL = registerSpell(new JiangshiInvokeSpell());
-//  public static final Supplier<AbstractSpell> JADE_SENTINEL_SPELL = registerSpell(new JadeSentinelSpell());
     public static final Supplier<AbstractSpell> UNDERWORLD_AID_SPELL = registerSpell(new UnderworldAidSpell());
     public static final Supplier<AbstractSpell> PUNISHING_HEAVEN_SPELL = registerSpell(new PunishingHeavenSpell());
-    public static final Supplier<AbstractSpell> DRAPES_OF_REFLECTION = registerSpell(new DrapesOfReflectionSpell());
+    public static final Supplier<AbstractSpell> DRAPES_OF_REFLECTION_SPELL = registerSpell(new DrapesOfReflectionSpell());
     public static final Supplier<AbstractSpell> CLOUD_RIDE_SPELL = registerSpell(new CloudRideSpell());
+    public static final Supplier<AbstractSpell> NEPHRITE_SLASH_SPELL = registerSpell(new NephriteSlashSpell());
+    public static final Supplier<AbstractSpell> JADE_BULLET_SPELL = registerSpell(new JadeBulletSpell());
 
     //SPIRIT SPELLS
     public static final Supplier<AbstractSpell> SOUL_CATALYST_SPELL = registerSpell(new SoulCatalystSpell());
@@ -46,6 +46,8 @@ public class MFTESpellRegistries extends SpellRegistry {
     public static final Supplier<AbstractSpell> REVENANT_OF_HONOR_SPELL = registerSpell(new RevenantOfHonorSpell());
     public static final Supplier<AbstractSpell> ASHIGARU_SQUAD_SPELL = registerSpell(new AshigaruSquadSpell());
     public static final Supplier<AbstractSpell> PHANTOM_CHARGE_SPELL = registerSpell(new PhantomChargeSpell());
+    public static final Supplier<AbstractSpell> ANCHORING_KUNAI = registerSpell(new AnchoringKunaiSpell());
+    public static final Supplier<AbstractSpell> SPLITTING_SHURIKEN = registerSpell(new SplittingShurikenSpell());
 
     //DUNE SPELLS
 

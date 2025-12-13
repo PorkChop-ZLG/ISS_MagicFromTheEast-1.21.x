@@ -72,8 +72,13 @@ public class SpiritChallengingSpell extends AbstractSpell {
     }
 
     @Override
+    public Optional<SoundEvent> getCastStartSound() {
+        return Optional.of(MFTESoundRegistries.SPIRIT_CAST.get());
+    }
+
+    @Override
     public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.of(MFTESoundRegistries.SOUL_CAST.get());
+        return Optional.of(MFTESoundRegistries.SPIRIT_EXTRACTING.get());
     }
 
     @Override
@@ -88,7 +93,7 @@ public class SpiritChallengingSpell extends AbstractSpell {
             if (challengedEntity != null) {
                 if (challengedEntity.getType().is(MFTETags.SPIRIT_CHALLENGING_IMMUNE)) {
                     if (entity instanceof ServerPlayer serverPlayer) {
-                        serverPlayer.connection.send(new ClientboundSetActionBarTextPacket(Component.translatable("ui.iss_magicfromtheeast.soulpiercer_not_enough_mana").withStyle(ChatFormatting.RED)));
+                        serverPlayer.connection.send(new ClientboundSetActionBarTextPacket(Component.translatable("ui.iss_magicfromtheeast.soul_extracting_false").withStyle(ChatFormatting.RED)));
                     }
                 } else {
                     ExtractedSoul extractedSoul = new ExtractedSoul(level, challengedEntity, entity);
@@ -98,6 +103,9 @@ public class SpiritChallengingSpell extends AbstractSpell {
                     extractedSoul.setDuration(getDuration(spellLevel, entity));
                     extractedSoul.setBonusPercent(getBonusPercent(spellLevel, entity));
                     extractedSoul.setPos(entity.position().add(entity.getViewVector(5)));
+
+                    //Enable the radius, make the linkedSoulEvent only work with this spell
+                    extractedSoul.enableRadius();
 
                     TargetedAreaEntity visualEntity = TargetedAreaEntity.createTargetAreaEntity(level, challengedEntity.position(), 12.0f, 0x00ffff);
                     visualEntity.setDuration(extractedSoul.duration);

@@ -68,7 +68,7 @@ public class MFTEItemRegistries {
     //Weapons
     public static final DeferredHolder<Item, Item> JADE_GUANDAO = ITEMS.register("jade_guandao",
             () -> new MagicSwordItem(MFTEExtendedWeaponTier.JADE_GUANDAO, ItemPropertiesHelper.equipment().rarity(MFTERarity.JADELIGHT_RARITY_PROXY.getValue()).attributes(ExtendedSwordItem.createAttributes(MFTEExtendedWeaponTier.JADE_GUANDAO)), SpellDataRegistryHolder.of(
-                    new SpellDataRegistryHolder(MFTESpellRegistries.SWORD_DANCE_SPELL, 8))));
+                    new SpellDataRegistryHolder(MFTESpellRegistries.NEPHRITE_SLASH_SPELL, 5))));
     public static final DeferredHolder<Item, Item> SOUL_BREAKER = ITEMS.register("soul_breaker",
             () -> new SoulBreakerItem(MFTEExtendedWeaponTier.SOUL_BREAKER, ItemPropertiesHelper.equipment().rarity(Rarity.RARE).fireResistant().attributes(ExtendedSwordItem.createAttributes(MFTEExtendedWeaponTier.SOUL_BREAKER))));
 
@@ -184,6 +184,7 @@ public class MFTEItemRegistries {
     //Spawn Eggs
     public static final Supplier<DeferredSpawnEggItem> TAOIST_SPAWN_EGG = ITEMS.register("taoist_spawn_egg", () -> new DeferredSpawnEggItem(MFTEEntityRegistries.TAOIST, 0xdfff00, 0x222021, ItemPropertiesHelper.material().stacksTo(64)));
     public static final Supplier<DeferredSpawnEggItem> ONMYOJI_SPAWN_EGG = ITEMS.register("onmyoji_spawn_egg", () -> new DeferredSpawnEggItem(MFTEEntityRegistries.ONMYOJI, 0xfbfbf9, 0x01ffff, ItemPropertiesHelper.material().stacksTo(64)));
+    public static final Supplier<DeferredSpawnEggItem> JIANGSHI_SPAWN_EGG = ITEMS.register("jiangshi_spawn_egg", () -> new DeferredSpawnEggItem(MFTEEntityRegistries.JIANGSHI, 0x281e5d, 0x006a4e, ItemPropertiesHelper.material().stacksTo(64)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

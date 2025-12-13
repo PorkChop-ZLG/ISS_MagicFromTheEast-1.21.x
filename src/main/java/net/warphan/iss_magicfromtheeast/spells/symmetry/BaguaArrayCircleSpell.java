@@ -111,7 +111,7 @@ public class BaguaArrayCircleSpell extends AbstractSpell {
         baguaCircle.setPos(spawn);
         world.addFreshEntity(baguaCircle);
 
-        TargetedAreaEntity visualEntity = TargetedAreaEntity.createTargetAreaEntity(world, spawn, radius, 0xffce1b);
+        TargetedAreaEntity visualEntity = TargetedAreaEntity.createTargetAreaEntity(world, spawn, radius, 0x00a36c);
         visualEntity.setDuration(duration);
         visualEntity.setOwner(baguaCircle);
         visualEntity.setShouldFade(true);
@@ -120,7 +120,7 @@ public class BaguaArrayCircleSpell extends AbstractSpell {
     }
 
     private float getDamage(int spellLevel, LivingEntity caster) {
-        return getSpellPower(spellLevel, caster) * .5f * (float) caster.getAttributeValue(AttributeRegistry.HOLY_SPELL_POWER);
+        return getSpellPower(spellLevel, caster) * .5f;
     }
     private float getRadius(int spellLevel, LivingEntity caster) {
         return 5;

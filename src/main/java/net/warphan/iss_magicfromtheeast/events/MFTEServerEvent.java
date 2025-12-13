@@ -53,6 +53,7 @@ import net.warphan.iss_magicfromtheeast.item.armor.ElementalCommanderArmorItem;
 import net.warphan.iss_magicfromtheeast.registries.MFTEAttributeRegistries;
 import net.warphan.iss_magicfromtheeast.registries.MFTEItemRegistries;
 import net.warphan.iss_magicfromtheeast.registries.MFTEEffectRegistries;
+import net.warphan.iss_magicfromtheeast.registries.MFTESoundRegistries;
 
 @EventBusSubscriber
 public class MFTEServerEvent {
@@ -240,25 +241,29 @@ public class MFTEServerEvent {
     public static void drapeReflectionEvent(ProjectileImpactEvent event) {
         var ray = event.getRayTraceResult();
         var projectile = event.getProjectile();
+        Vec3 hitLocation = ray.getLocation();
         if (ray instanceof EntityHitResult hitResult && hitResult.getEntity() instanceof ShieldPart shieldPart && shieldPart.parentEntity instanceof JadeDrapesEntity jadeDrapes) {
             event.setCanceled(true);
             if (projectile.getOwner() != jadeDrapes.getSummoner()) {
-            Vec3 reflectionVec = projectile.getDeltaMovement().reverse();
+                Vec3 reflectionVec = projectile.getDeltaMovement().reverse();
 
-            if (projectile instanceof AbstractMagicProjectile magicProjectile) {
-                magicProjectile.setOwner(jadeDrapes.getSummoner());
-                magicProjectile.setDamage(magicProjectile.getDamage() * jadeDrapes.percentReflectDamage);
-            }
+                if (projectile instanceof AbstractMagicProjectile magicProjectile) {
+                    magicProjectile.setOwner(jadeDrapes.getSummoner());
+                    magicProjectile.setDamage(magicProjectile.getDamage() * jadeDrapes.percentReflectDamage);
+                }
 
-            jadeDrapes.playSound(SoundEvents.ENDER_EYE_DEATH);
-            projectile.setDeltaMovement(reflectionVec);
+                jadeDrapes.playSound(MFTESoundRegistries.JADE_DEFLECT.value());
+                projectile.setDeltaMovement(reflectionVec);
+                if (!projectile.level.isClientSide) {
+                    MagicManager.spawnParticles(projectile.level(), ParticleTypes.GLOW, hitLocation.x, hitLocation.y, hitLocation.z, 8, .1, .1, .1, .5, false);
+                }
             }
 
             //For some special case
             if (projectile.getOwner() == null) {
                 projectile.setOwner(jadeDrapes.getSummoner());
 
-                jadeDrapes.playSound(SoundEvents.ENDER_EYE_DEATH);
+                jadeDrapes.playSound(MFTESoundRegistries.JADE_DEFLECT.value());
                 projectile.setDeltaMovement(projectile.getDeltaMovement().reverse());
             }
         }

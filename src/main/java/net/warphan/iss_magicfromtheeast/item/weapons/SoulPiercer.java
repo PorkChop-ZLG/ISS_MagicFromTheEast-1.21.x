@@ -165,5 +165,6 @@ public class SoulPiercer extends ProjectileWeaponItem {
         ).withStyle(ChatFormatting.AQUA));
         components.add(Component.literal(" ").append(Component.translatable(this.getDescriptionId() + ".description.mana_cost",
                 Component.literal(Utils.stringTruncation(getDisplayManaCost(stack, MinecraftInstanceHelper.getPlayer()), 1)).withStyle(ChatFormatting.YELLOW))
-        ).withStyle(ChatFormatting.AQUA));    }
+        ).withStyle(ChatFormatting.AQUA));
+    }
 }

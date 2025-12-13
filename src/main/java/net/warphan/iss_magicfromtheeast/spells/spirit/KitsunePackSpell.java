@@ -43,7 +43,7 @@ public class KitsunePackSpell extends AbstractSpell {
     public KitsunePackSpell() {
         this.manaCostPerLevel = 15;
         this.baseSpellPower = 0;
-        this.spellPowerPerLevel = 5;
+        this.spellPowerPerLevel = 4;
         this.castTime = 20;
         this.baseManaCost = 30;
     }

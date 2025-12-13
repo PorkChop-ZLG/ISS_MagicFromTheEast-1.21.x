@@ -259,10 +259,10 @@ public class BoneHandsEntity extends AbstractSpellCastingMob implements GeoEntit
     private final RawAnimation BONE_RETREAT = RawAnimation.begin().thenPlay("bone_retreat");
 
     private final AnimationController<BoneHandsEntity> riseController = new AnimationController<>(this, "bone_rise_control", 0, this::risePredicate);
-    private final AnimationController<BoneHandsEntity> idleController = new AnimationController<>(this, "bone_idle_control", 0, this::idlePredicate);
-    private final AnimationController<BoneHandsEntity> slamController = new AnimationController<>(this, "bone_slamming", 0, this::slamPredicate);
+    private final AnimationController<BoneHandsEntity> idleController = new AnimationController<>(this, "bone_idle_control", 3, this::idlePredicate);
+    private final AnimationController<BoneHandsEntity> slamController = new AnimationController<>(this, "bone_slamming", 2, this::slamPredicate);
     private final AnimationController<BoneHandsEntity> defeatedController = new AnimationController<>(this, "bone_ded", 0, this::deadPredicate);
-    private final AnimationController<BoneHandsEntity> retreatController = new AnimationController<>(this, "bone_bye", 0, this::retreatPredicate);
+    private final AnimationController<BoneHandsEntity> retreatController = new AnimationController<>(this, "bone_bye", 2, this::retreatPredicate);
     RawAnimation animationToPlay = null;
 
     private PlayState risePredicate(software.bernie.geckolib.animation.AnimationState event) {

@@ -1,15 +1,19 @@
 package net.warphan.iss_magicfromtheeast.setup;
 
+import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.warphan.iss_magicfromtheeast.ISS_MagicFromTheEast;
 import net.warphan.iss_magicfromtheeast.configs.MFTEServerConfigs;
 import net.warphan.iss_magicfromtheeast.entity.mobs.bone_hands.BoneHandsEntity;
 import net.warphan.iss_magicfromtheeast.entity.mobs.jade_executioner.JadeExecutionerEntity;
 import net.warphan.iss_magicfromtheeast.entity.mobs.jiangshi.JiangshiEntity;
+import net.warphan.iss_magicfromtheeast.entity.mobs.jiangshi.SummonedJiangshiEntity;
 import net.warphan.iss_magicfromtheeast.entity.mobs.kitsune.SummonedKitsune;
 import net.warphan.iss_magicfromtheeast.entity.mobs.mfte_wizards.onmyoji.OnmyojiEntity;
 import net.warphan.iss_magicfromtheeast.entity.mobs.mfte_wizards.taoist.TaoistEntity;
@@ -19,8 +23,9 @@ import net.warphan.iss_magicfromtheeast.entity.spells.spirit_challenging.Extract
 import net.warphan.iss_magicfromtheeast.entity.spells.summoned_cloud.SummonCloudEntity;
 import net.warphan.iss_magicfromtheeast.registries.MFTEEntityRegistries;
 import net.warphan.iss_magicfromtheeast.registries.MFTESpellRegistries;
+import net.warphan.iss_magicfromtheeast.util.MFTEUtils;
 
-@EventBusSubscriber(modid = ISS_MagicFromTheEast.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ISS_MagicFromTheEast.MOD_ID)
 public class CommonSetup {
     @SubscribeEvent
     public static void onModConfigLoadingEvent(ModConfigEvent.Loading event) {
@@ -41,7 +46,8 @@ public class CommonSetup {
     @SubscribeEvent
     public static void onAttributeCreate(EntityAttributeCreationEvent event) {
 //        event.put(MFTEEntityRegistries.JADE_SENTINEL.get(), JadeSentinel.prepareAttributes().build());
-        event.put(MFTEEntityRegistries.SUMMONED_JIANGSHI.get(), JiangshiEntity.prepareAttributes().build());
+        event.put(MFTEEntityRegistries.JIANGSHI.get(), JiangshiEntity.prepareAttributes().build());
+        event.put(MFTEEntityRegistries.SUMMONED_JIANGSHI.get(), SummonedJiangshiEntity.prepareAttributes().build());
         event.put(MFTEEntityRegistries.JADE_EXECUTIONER.get(), JadeExecutionerEntity.prepareAttributes().build());
         event.put(MFTEEntityRegistries.SUMMON_CLOUD_ENTITY.get(), SummonCloudEntity.createAttributes().build());
 
@@ -53,5 +59,10 @@ public class CommonSetup {
 
         event.put(MFTEEntityRegistries.TAOIST.get(), TaoistEntity.prepareAttributes().build());
         event.put(MFTEEntityRegistries.ONMYOJI.get(), OnmyojiEntity.prepareAttributes().build());
+    }
+
+    @SubscribeEvent
+    public static void spawnPlacement(RegisterSpawnPlacementsEvent event) {
+        event.register(MFTEEntityRegistries.JIANGSHI.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (type, serverLevelAccessor, spawnType, blockPos, random) -> MFTEUtils.checkMonsterSpawnRules(serverLevelAccessor, spawnType, blockPos, random), RegisterSpawnPlacementsEvent.Operation.OR);
     }
 }

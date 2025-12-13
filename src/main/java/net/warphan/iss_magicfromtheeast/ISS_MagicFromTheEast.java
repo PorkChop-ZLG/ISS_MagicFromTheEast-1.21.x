@@ -45,6 +45,7 @@ public class ISS_MagicFromTheEast {
         MFTEEnchantmentEffectRegistries.register(modEventBus);
         MFTEDataComponentRegistries.register(modEventBus);
         MFTELootRegistries.register(modEventBus);
+        MFTEParticleRegistries.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.SERVER, MFTEServerConfigs.SPEC, String.format("%s-server.toml", ISS_MagicFromTheEast.MOD_ID));
     }
@@ -63,6 +64,6 @@ public class ISS_MagicFromTheEast {
     }
 
     public static ResourceLocation id(@NotNull String path) {
-        return new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, path);
+        return ResourceLocation.fromNamespaceAndPath(ISS_MagicFromTheEast.MOD_ID, path);
     }
 }

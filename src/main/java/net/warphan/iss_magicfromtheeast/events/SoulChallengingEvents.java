@@ -26,7 +26,7 @@ public class SoulChallengingEvents {
         if (entity instanceof ExtractedSoul challengedSoul) {
             var soulOwner = challengedSoul.getOwner();
             float linkingRange = 12.0f;
-            if (!challengedSoul.level.isClientSide && soulOwner != null) {
+            if (!challengedSoul.level.isClientSide && soulOwner != null && challengedSoul.hasRadius()) {
                 float distance = challengedSoul.distanceTo(soulOwner);
                 if (distance > linkingRange) {
                     challengedSoul.onUnSummon();
@@ -52,7 +52,7 @@ public class SoulChallengingEvents {
             float damageAmountOver = extractedSoul.getHealth() * extractedSoul.bonusPercent;
             if (soulOwner != null) {
                 if (source.is(MFTEDamageTypeTagGenerator.SOUL_HURTING)) {
-                //if damage on soul = soul damage type -> deal 100% damage back to the owner
+                //if damage on soul is soul damage type -> deal 100% damage back to the owner
                 soulOwner.hurt(soulOwner.damageSources().source(MFTEDamageTypes.SOUL_DAMAGE, attacker), damageOnSoul);
                 } else if (damageOnSoul <= extractedSoul.getHealth()) {
                     soulOwner.hurt(soulOwner.damageSources().source(MFTEDamageTypes.SOUL_DAMAGE, attacker), damageAmount);

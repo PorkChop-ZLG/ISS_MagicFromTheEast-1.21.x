@@ -41,19 +41,26 @@ public class SoulSkullProjectile extends AbstractMagicProjectile implements GeoE
         setOwner(caster);
     }
 
+    public void shoot(Vec3 rotation, float inaccuracy) {
+        var speed = rotation.length();
+        Vec3 offset = Utils.getRandomVec3(1).normalize().scale(inaccuracy);
+        var motion = rotation.normalize().add(offset).normalize().scale(speed);
+        super.shoot(motion);
+    }
+
     @Override
     public void trailParticles() {
         Vec3 pos = this.getBoundingBox().getCenter().add(getDeltaMovement());
         pos = pos.add(getDeltaMovement());
         Vec3 random = new Vec3(Utils.getRandomScaled(.05f), Utils.getRandomScaled(.05f), Utils.getRandomScaled(.05f));
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 3; i++) {
             level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, pos.x, pos.y, pos.z, random.x, random.y, random.z);
         }
     }
 
     @Override
     public void impactParticles(double x, double y, double z) {
-        MagicManager.spawnParticles(level, ParticleTypes.SOUL_FIRE_FLAME, x, y, z, 15, .4, .4, .4, 0.2, true);
+        MagicManager.spawnParticles(level, ParticleTypes.SOUL_FIRE_FLAME, x, y, z, 8, .4, .4, .4, 0.2, true);
         MagicManager.spawnParticles(level, ParticleTypes.SCULK_SOUL, x, y, z, 5, .3, .3, .3, 0.1, true);
     }
 
@@ -80,6 +87,7 @@ public class SoulSkullProjectile extends AbstractMagicProjectile implements GeoE
         DamageSources.applyDamage(entity, getDamage(), MFTESpellRegistries.SOUL_CATALYST_SPELL.get().getDamageSource(this, getOwner()));
         if (entity instanceof LivingEntity livingEntity) {
             livingEntity.addEffect(new MobEffectInstance(MFTEEffectRegistries.SOULBURN, 80, 0));
+            livingEntity.invulnerableTime = 0;
         }
         discard();
     }

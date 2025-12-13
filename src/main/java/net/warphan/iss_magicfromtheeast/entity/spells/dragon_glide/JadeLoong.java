@@ -6,6 +6,7 @@ import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.ClipContext;
@@ -15,6 +16,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.warphan.iss_magicfromtheeast.registries.MFTEEntityRegistries;
 import net.warphan.iss_magicfromtheeast.registries.MFTESpellRegistries;
+import net.warphan.iss_magicfromtheeast.util.MFTEParticleHelper;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -41,11 +43,33 @@ public class JadeLoong extends AbstractMagicProjectile implements GeoEntity {
     }
 
     @Override
-    public void trailParticles() {return;}
+    public void trailParticles() {
+        float yHeading = -((float) (Mth.atan2(getDeltaMovement().z, getDeltaMovement().x) * (double) (180F / (float) Math.PI)) + 90.0F);
+        float radius = .25f;
+        int steps = 2;
+        var vec = getDeltaMovement();
+        double x2 = getX();
+        double x1 = x2 - vec.x;
+        double y2 = getY();
+        double y1 = y2 - vec.y;
+        double z2 = getZ();
+        double z1 = z2 - vec.z;
+        for (int j = 0; j < steps; j++) {
+            float offset = (1f / steps) * j;
+            double radians = ((tickCount + offset) / 7.5f) * 360 * Mth.DEG_TO_RAD;
+            Vec3 swirl = new Vec3(Math.cos(radians) * radius, Math.sin(radians) * radius, 0).yRot(yHeading * Mth.DEG_TO_RAD);
+            double x = Mth.lerp(offset, x1, x2) + swirl.x;
+            double y = Mth.lerp(offset, y1, y2) + swirl.y + getBbHeight() / 2;
+            double z = Mth.lerp(offset, z1, z2) + swirl.z;
+            Vec3 jitter = Vec3.ZERO;
+            level.addParticle(ParticleTypes.GLOW, x, y, z, jitter.x, jitter.y, jitter.z);
+        }
+    }
 
     @Override
     public void impactParticles(double x, double y, double z) {
-        MagicManager.spawnParticles(level, ParticleTypes.GLOW, x, y, z, 16, 0.8, 0.8, 0.8, 1, false);
+        MagicManager.spawnParticles(level, ParticleTypes.SCRAPE, x, y, z, 5, 0.8, 0.8, 0.8, 1, false);
+        MagicManager.spawnParticles(level, MFTEParticleHelper.JADE_SHATTER, x, y, z, 2, 0.2, 0.2, 0.2, 0.2, false);
     }
 
     @Override

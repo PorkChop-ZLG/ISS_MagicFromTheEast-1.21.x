@@ -3,7 +3,6 @@ package net.warphan.iss_magicfromtheeast.spells.symmetry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.events.SpellSummonEvent;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.Utils;
@@ -27,8 +26,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForge;
 import net.warphan.iss_magicfromtheeast.ISS_MagicFromTheEast;
-import net.warphan.iss_magicfromtheeast.entity.mobs.jiangshi.JiangshiEntity;
-import net.warphan.iss_magicfromtheeast.registries.MFTEAttributeRegistries;
+import net.warphan.iss_magicfromtheeast.entity.mobs.jiangshi.SummonedJiangshiEntity;
 import net.warphan.iss_magicfromtheeast.registries.MFTESchoolRegistries;
 import net.warphan.iss_magicfromtheeast.spells.MFTESpellAnimations;
 
@@ -116,7 +114,7 @@ public class JiangshiInvokeSpell extends AbstractSpell {
             SummonedEntitiesCastData summonedEntitiesCastData = new SummonedEntitiesCastData();
 
             for (int i = 0; i < 3; i++) {
-                JiangshiEntity jiangshi = new JiangshiEntity(world, entity, true);
+                SummonedJiangshiEntity jiangshi = new SummonedJiangshiEntity(world, entity, true);
 
                 jiangshi.getAttributes().getInstance(Attributes.ATTACK_DAMAGE).setBaseValue(getJiangshiDamage(spellLevel, entity));
                 jiangshi.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(getJiangshiHealth(spellLevel, entity));
@@ -145,11 +143,11 @@ public class JiangshiInvokeSpell extends AbstractSpell {
     }
 
     private float getJiangshiDamage(int spellLevel, LivingEntity summoner) {
-        return (2 + spellLevel) * (float) summoner.getAttributeValue(AttributeRegistry.BLOOD_SPELL_POWER);
+        return (2 + spellLevel);
     }
 
     private float getJiangshiHealth(int spellLevel, LivingEntity summoner) {
-        return (10 + spellLevel * 5) * (float) summoner.getAttributeValue(MFTEAttributeRegistries.SYMMETRY_SPELL_POWER);
+        return (10 + spellLevel * 5);
     }
 
     @Override

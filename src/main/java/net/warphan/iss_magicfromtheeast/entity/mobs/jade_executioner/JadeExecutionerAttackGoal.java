@@ -195,7 +195,7 @@ public class JadeExecutionerAttackGoal extends WarlockAttackGoal {
     }
 
     public void playBashSound() {
-        mob.playSound(MFTESoundRegistries.SHIELD_BASH.get(), 1, Mth.randomBetweenInclusive(mob.getRandom(), 9, 13) * .1f);
+        mob.playSound(SoundEvents.SHIELD_BLOCK, 1, Mth.randomBetweenInclusive(mob.getRandom(), 9, 13) * .1f);
     }
 
     public void playBiteSound() {

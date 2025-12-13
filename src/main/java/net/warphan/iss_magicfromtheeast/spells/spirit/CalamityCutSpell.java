@@ -38,7 +38,7 @@ public class CalamityCutSpell extends AbstractSpell {
     private final ResourceLocation spellID = new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "calamity_cut");
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
-            .setMinRarity(SpellRarity.EPIC)
+            .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(MFTESchoolRegistries.SPIRIT_RESOURCE)
             .setMaxLevel(5)
             .setCooldownSeconds(25)

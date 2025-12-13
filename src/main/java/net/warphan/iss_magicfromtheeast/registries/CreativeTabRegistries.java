@@ -93,6 +93,7 @@ public class CreativeTabRegistries {
 
                 entries.accept(MFTEItemRegistries.TAOIST_SPAWN_EGG.get());
                 entries.accept(MFTEItemRegistries.ONMYOJI_SPAWN_EGG.get());
+                entries.accept(MFTEItemRegistries.JIANGSHI_SPAWN_EGG.get());
 
                 entries.accept(MFTEItemRegistries.BALANCE_PATTERN.get());
             })

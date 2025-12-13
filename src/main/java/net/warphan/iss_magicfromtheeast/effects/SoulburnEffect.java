@@ -38,9 +38,9 @@ public class SoulburnEffect extends MagicMobEffect implements ISyncedMobEffect {
 
     @Override
     public void clientTick(LivingEntity entity, MobEffectInstance instance) {
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 1; i++) {
             Vec3 pos = new Vec3(Utils.getRandomScaled(1), Utils.getRandomScaled(1.0f) + 1.0f, Utils.getRandomScaled(1)).add(entity.position());
-            Vec3 random = new Vec3(Utils.getRandomScaled(.08f), Utils.getRandomScaled(.08f), Utils.getRandomScaled(.08f));
+            Vec3 random = new Vec3(Utils.getRandomScaled(.06f), Utils.getRandomScaled(.06f), Utils.getRandomScaled(.06f));
             entity.level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, pos.x, pos.y, pos.z, random.x, random.y, random.z);
         }
     }

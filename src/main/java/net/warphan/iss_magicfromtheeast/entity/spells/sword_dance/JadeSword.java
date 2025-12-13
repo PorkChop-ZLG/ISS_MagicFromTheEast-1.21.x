@@ -6,6 +6,7 @@ import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -22,8 +23,10 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.EventHooks;
 import net.warphan.iss_magicfromtheeast.registries.MFTEEntityRegistries;
+import net.warphan.iss_magicfromtheeast.registries.MFTESchoolRegistries;
 import net.warphan.iss_magicfromtheeast.registries.MFTESoundRegistries;
 import net.warphan.iss_magicfromtheeast.registries.MFTESpellRegistries;
+import net.warphan.iss_magicfromtheeast.util.MFTEParticleHelper;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
@@ -52,11 +55,12 @@ public class JadeSword extends AbstractMagicProjectile implements GeoEntity {
     @Override
     public void trailParticles() {
         Vec3 vec3 = this.position().subtract(getDeltaMovement());
+        level.addParticle(new DustParticleOptions(MFTESchoolRegistries.SYMMETRY.get().getTargetingColor(), 1.6f), vec3.x, vec3.y, vec3.z, 0, 0, 0);
         level.addParticle(ParticleTypes.GLOW, vec3.x, vec3.y, vec3.z, 0, 0, 0);
     }
 
     public void impactParticles(double x, double y, double z) {
-        MagicManager.spawnParticles(level, ParticleTypes.SCRAPE, x, y, z, 5, .6, .6, .6, 0.2, true);
+        MagicManager.spawnParticles(level, MFTEParticleHelper.JADE_SHATTER, x, y, z, 1, .4, .4, .4, 0.2, true);
         MagicManager.spawnParticles(level, ParticleTypes.GLOW, x, y, z, 3, .4, .4, .4, 0.3, true);
     }
 
@@ -100,7 +104,8 @@ public class JadeSword extends AbstractMagicProjectile implements GeoEntity {
 
     private void doBreaking() {
         var center = this.position();
-        MagicManager.spawnParticles(level, ParticleTypes.SCRAPE, center.x, center.y, center.z, 10, .8, .8, .8, 0.2, true);
+        MagicManager.spawnParticles(level, ParticleTypes.SCRAPE, center.x, center.y, center.z, 8, .8, .8, .8, 0.2, true);
+        MagicManager.spawnParticles(level, MFTEParticleHelper.JADE_SHATTER, center.x, center.y, center.z, 3, .6, .6, .6, 0.2, true);
         level.playSound(null, BlockPos.containing(position()), SoundEvents.ITEM_BREAK, SoundSource.NEUTRAL, 2f, .5f);
     }
 

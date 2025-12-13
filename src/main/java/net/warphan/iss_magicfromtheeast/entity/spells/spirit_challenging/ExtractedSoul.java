@@ -31,6 +31,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.neoforged.neoforge.entity.IEntityWithComplexSpawn;
 import net.warphan.iss_magicfromtheeast.registries.MFTEEntityRegistries;
+import net.warphan.iss_magicfromtheeast.registries.MFTESoundRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
@@ -67,6 +68,7 @@ public class ExtractedSoul extends LivingEntity implements IEntityWithComplexSpa
     }
 
     protected static final EntityDataAccessor<Boolean> DATA_IS_BABY = SynchedEntityData.defineId(ExtractedSoul.class, EntityDataSerializers.BOOLEAN);
+    protected static final EntityDataAccessor<Boolean> DATA_HAS_RADIUS = SynchedEntityData.defineId(ExtractedSoul.class, EntityDataSerializers.BOOLEAN);
 
     public int duration = -1;
     public float bonusPercent;
@@ -84,6 +86,15 @@ public class ExtractedSoul extends LivingEntity implements IEntityWithComplexSpa
     protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
         super.defineSynchedData(pBuilder);
         pBuilder.define(DATA_IS_BABY, false);
+        pBuilder.define(DATA_HAS_RADIUS, false);
+    }
+
+    public boolean hasRadius() {
+        return entityData.get(DATA_HAS_RADIUS);
+    }
+
+    public void enableRadius() {
+        entityData.set(DATA_HAS_RADIUS, true);
     }
 
     private HumanoidArm mainArm = HumanoidArm.RIGHT;
@@ -135,7 +146,7 @@ public class ExtractedSoul extends LivingEntity implements IEntityWithComplexSpa
         refreshDimensions();
     }
 
-    public ExtractedSoul(Level level, LivingEntity entityToCopy, LivingEntity extractorEntity) {
+    public ExtractedSoul(Level level, LivingEntity entityToCopy, @Nullable LivingEntity extractorEntity) {
         this(MFTEEntityRegistries.EXTRACTED_SOUL.get(), level);
         copyEntityVisualProperties(this, entityToCopy);
         if (!(entityToCopy instanceof Player)) {
@@ -257,7 +268,7 @@ public class ExtractedSoul extends LivingEntity implements IEntityWithComplexSpa
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.SOUL_ESCAPE.value();
+        return MFTESoundRegistries.SOUL_CRUSHED.value();
     }
 
     @Override

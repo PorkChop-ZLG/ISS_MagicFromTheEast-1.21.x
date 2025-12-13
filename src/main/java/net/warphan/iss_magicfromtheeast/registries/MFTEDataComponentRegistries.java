@@ -9,6 +9,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.warphan.iss_magicfromtheeast.ISS_MagicFromTheEast;
+import net.warphan.iss_magicfromtheeast.item.LoadableWeaponContents;
 import net.warphan.iss_magicfromtheeast.item.weapons.RepeatingCrossbow;
 import net.warphan.iss_magicfromtheeast.util.MFTEUtils;
 
@@ -28,8 +29,11 @@ public class MFTEDataComponentRegistries {
         return MFTE_COMPONENTS.register(pName, () -> pBuilder.apply(DataComponentType.builder()).build());
     }
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<LoadableWeaponContents>> LOADABLE_WEAPON_CONTENTS = register("loadable_weapon_contents", (builder) -> builder.persistent(LoadableWeaponContents.CODEC).networkSynchronized(LoadableWeaponContents.STREAM_CODEC).cacheEncoding());
+
     //Repeating Crossbow
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<RepeatingCrossbow.ProjectileAmountComponent>> CROSSBOW_AMMO_AMOUNT = register("crossbow_ammo_amount", (builder) -> builder.persistent(RepeatingCrossbow.ProjectileAmountComponent.CODEC).networkSynchronized(RepeatingCrossbow.ProjectileAmountComponent.STREAM_CODEC).cacheEncoding());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<RepeatingCrossbow.ChargeStateComponent>> CROSSBOW_CHARGE_STATE = register("crossbow_charge_state", (builder) -> builder.persistent(RepeatingCrossbow.ChargeStateComponent.CODEC).networkSynchronized(RepeatingCrossbow.ChargeStateComponent.STREAM_CODEC).cacheEncoding());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<RepeatingCrossbow.LoadingStateComponent>> CROSSBOW_LOADING_STATE = register("crossbow_loading_state", (builder) -> builder.persistent(RepeatingCrossbow.LoadingStateComponent.CODEC).networkSynchronized(RepeatingCrossbow.LoadingStateComponent.STREAM_CODEC).cacheEncoding());
 
     //Specific Enchantments
@@ -37,5 +41,6 @@ public class MFTEDataComponentRegistries {
             "soul_damage", builder -> builder.persistent(ConditionalEffect.codec(EnchantmentValueEffect.CODEC, LootContextParamSets.ENCHANTED_DAMAGE).listOf()));
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<ConditionalEffect<EnchantmentValueEffect>>>> MANA_USE = MFTE_ENCHANTMENT_EFFECT_COMPONENTS.registerComponentType(
             "mana_use", builder -> builder.persistent(ConditionalEffect.codec(EnchantmentValueEffect.CODEC, LootContextParamSets.ENCHANTED_ITEM).listOf()));
-
+//    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<ConditionalEffect<EnchantmentValueEffect>>>> BARRAGE_SHOT = MFTE_ENCHANTMENT_EFFECT_COMPONENTS.registerComponentType(
+//            "barrage_shot", builder -> builder.persistent(ConditionalEffect.codec(EnchantmentValueEffect.CODEC, LootContextParamSets.ENCHANTED_ENTITY).listOf()));
 }

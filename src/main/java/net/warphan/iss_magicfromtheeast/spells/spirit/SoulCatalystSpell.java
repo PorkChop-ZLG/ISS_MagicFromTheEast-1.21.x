@@ -3,8 +3,8 @@ package net.warphan.iss_magicfromtheeast.spells.spirit;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.*;
+import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.capabilities.magic.RecastInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -15,8 +15,8 @@ import net.warphan.iss_magicfromtheeast.ISS_MagicFromTheEast;
 import net.warphan.iss_magicfromtheeast.entity.spells.soul_skull.SoulSkullProjectile;
 import net.warphan.iss_magicfromtheeast.registries.MFTESchoolRegistries;
 import net.warphan.iss_magicfromtheeast.registries.MFTESoundRegistries;
+import net.warphan.iss_magicfromtheeast.spells.MFTESpellAnimations;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,9 +33,9 @@ public class SoulCatalystSpell extends AbstractSpell {
 
     public SoulCatalystSpell() {
         this.manaCostPerLevel = 5;
-        this.baseSpellPower = 3;
+        this.baseSpellPower = 2;
         this.spellPowerPerLevel = 1;
-        this.castTime = 0;
+        this.castTime = 20;
         this.baseManaCost = 35;
     }
 
@@ -43,13 +43,13 @@ public class SoulCatalystSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
                 Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation((getSpellPower(spellLevel, caster) / 2), 1)),
-                Component.translatable("ui.irons_spellbooks.projectile_count", (int) (getRecastCount(spellLevel, caster)))
+                Component.translatable("ui.irons_spellbooks.projectile_count", (int) 2 + spellLevel / 2)
         );
     }
 
     @Override
     public CastType getCastType() {
-        return CastType.INSTANT;
+        return CastType.LONG;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class SoulCatalystSpell extends AbstractSpell {
 
     @Override
     public Optional<SoundEvent> getCastStartSound() {
-        return Optional.empty();
+        return Optional.of(MFTESoundRegistries.SPIRIT_CAST.get());
     }
 
     @Override
@@ -73,20 +73,26 @@ public class SoulCatalystSpell extends AbstractSpell {
     }
 
     @Override
-    public int getRecastCount(int spellLevel, @Nullable LivingEntity caster) {
-        return 2 + spellLevel / 2;
+    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
+        int projectileCount = 2 + spellLevel / 2;
+
+        for (int i = 0; i < projectileCount; i++) {
+            SoulSkullProjectile soulSkull = new SoulSkullProjectile(level, entity);
+            soulSkull.setPos(entity.position().add(0, entity.getEyeHeight() - soulSkull.getBoundingBox().getYsize() * .5f, 0));
+            soulSkull.shoot(entity.getLookAngle(), .12f);
+            soulSkull.setDamage(getSpellPower(spellLevel, entity) / 2);
+            level.addFreshEntity(soulSkull);
+            super.onCast(level, spellLevel, entity, castSource, playerMagicData);
+        }
     }
 
     @Override
-    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        if (!playerMagicData.getPlayerRecasts().hasRecastForSpell(getSpellId())) {
-            playerMagicData.getPlayerRecasts().addRecast(new RecastInstance(getSpellId(), spellLevel, getRecastCount(spellLevel, entity), 100, castSource, null), playerMagicData);
-        }
-        SoulSkullProjectile soulSkull = new SoulSkullProjectile(level, entity);
-        soulSkull.setPos(entity.position().add(0, entity.getEyeHeight() - soulSkull.getBoundingBox().getYsize() * .5f,0).add(entity.getForward()));
-        soulSkull.shoot(entity.getLookAngle());
-        soulSkull.setDamage(getSpellPower(spellLevel, entity) / 2);
-        level.addFreshEntity(soulSkull);
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
+    public AnimationHolder getCastStartAnimation() {
+        return MFTESpellAnimations.ANIMATION_CIRCLE_DRAW;
+    }
+
+    @Override
+    public AnimationHolder getCastFinishAnimation() {
+        return SpellAnimations.ANIMATION_INSTANT_CAST;
     }
 }

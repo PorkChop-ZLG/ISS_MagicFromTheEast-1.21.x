@@ -11,6 +11,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.warphan.iss_magicfromtheeast.ISS_MagicFromTheEast;
+import net.warphan.iss_magicfromtheeast.effects.AnchoredSoulEffect;
 import net.warphan.iss_magicfromtheeast.effects.MistStepEffect;
 import net.warphan.iss_magicfromtheeast.effects.ReversalHealingEffect;
 import net.warphan.iss_magicfromtheeast.effects.SoulburnEffect;
@@ -32,6 +33,7 @@ public class MFTEEffectRegistries{
             .addAttributeModifier(Attributes.JUMP_STRENGTH, ISS_MagicFromTheEast.id("mobeffect_mist_jump"), 0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)
             .addAttributeModifier(Attributes.SAFE_FALL_DISTANCE, ISS_MagicFromTheEast.id("mobeffect_mist_safe_fall"), 8, AttributeModifier.Operation.ADD_VALUE)
             .addAttributeModifier(Attributes.WATER_MOVEMENT_EFFICIENCY, ISS_MagicFromTheEast.id("mobeffect_mist_water_speed"), 0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+    public static final DeferredHolder<MobEffect, MobEffect> ANCHORED_SOUL = MFTE_MOB_EFFECT_DEFERRED_REGISTER.register("anchored_soul", () -> new AnchoredSoulEffect(MobEffectCategory.HARMFUL, 0X00ffff));
 
     public static final DeferredHolder<MobEffect, MobEffect> FLAG_FIRE = MFTE_MOB_EFFECT_DEFERRED_REGISTER.register("effect_banner_red", () -> new MagicMobEffect(MobEffectCategory.BENEFICIAL, 0xff3403)
             .addAttributeModifier(Attributes.ATTACK_DAMAGE, ISS_MagicFromTheEast.id("mobeffect_flag_fire_damage"), 0.10f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)

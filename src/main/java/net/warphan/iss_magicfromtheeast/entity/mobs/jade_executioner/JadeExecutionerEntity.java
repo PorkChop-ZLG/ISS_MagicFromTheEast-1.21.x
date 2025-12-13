@@ -35,6 +35,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.warphan.iss_magicfromtheeast.registries.*;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -84,7 +85,7 @@ public class JadeExecutionerEntity extends AbstractSpellCastingMob implements Ge
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
 
-        this.goalSelector.addGoal(1, new JadeExecutionerAttackGoal(this, 1f, 0, 0));
+        this.goalSelector.addGoal(1, new JadeExecutionerAttackGoal(this, 1.0f, 0, 0));
 
         this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.7));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
@@ -311,7 +312,7 @@ public class JadeExecutionerEntity extends AbstractSpellCastingMob implements Ge
         level.getEntities(entity, entity.getBoundingBox().inflate(radius, 4, radius), (target) -> !DamageSources.isFriendlyFireBetween(target, entity)
                 && Utils.hasLineOfSight(level, entity, target, true)).forEach(target -> {
             if (target instanceof LivingEntity livingEntity && livingEntity.distanceToSqr(entity) < radius * radius) {
-            DamageSources.applyDamage(target, damage, MFTESpellRegistries.PUNISHING_HEAVEN_SPELL.get().getDamageSource(entity));}});
+            DamageSources.applyDamage(target, damage, MFTESpellRegistries.PUNISHING_HEAVEN_SPELL.get().getDamageSource(this, getSummoner()));}});
     }
 
     //Animations
@@ -326,7 +327,6 @@ public class JadeExecutionerEntity extends AbstractSpellCastingMob implements Ge
     private final RawAnimation EXECUTIONER_DEAD = RawAnimation.begin().thenPlay("defeat");
 
     private final AnimationController<JadeExecutionerEntity> showdownController = new AnimationController<>(this, "showdown_controller", 0, this::showdownPredicate);
-    private final AnimationController<JadeExecutionerEntity> idleController = new AnimationController<>(this, "idle_controller", 0, this::idlePredicate);
     private final AnimationController<JadeExecutionerEntity> movingController = new AnimationController<>(this, "moving_controller", 5, this::movePredicate);
     private final AnimationController<JadeExecutionerEntity> deadController = new AnimationController<>(this, "dead_controller", 0, this::deadPredicate);
     private final AnimationController<JadeExecutionerEntity> combatController = new AnimationController<>(this, "combat_controller", 0, this::combatPredicate);
@@ -341,22 +341,21 @@ public class JadeExecutionerEntity extends AbstractSpellCastingMob implements Ge
         return PlayState.CONTINUE;
     }
 
-    private PlayState idlePredicate(software.bernie.geckolib.animation.AnimationState event) {
-        if (isAnimatingShowdown() || this.walkAnimation.speed() > 0.05f)
-            return PlayState.STOP;
-        else {
-            event.getController().setAnimation(EXECUTIONER_IDLE);
-            return PlayState.CONTINUE;
-        }
-    }
-
     private PlayState movePredicate(software.bernie.geckolib.animation.AnimationState event) {
-        if (isAnimatingShowdown() || !this.walkAnimation.isMoving() || this.walkAnimation.speed() <= 0.05f)
+        Vec3 motion = this.getDeltaMovement();
+        float horizontalSpeed = (float) Math.sqrt(motion.x * motion.x + motion.z * motion.z);
+
+        if (isAnimatingShowdown() || isAnimatingDead()) {
             return PlayState.STOP;
-        else {
+        } else if (horizontalSpeed > 0.001f) {
             event.getController().setAnimation(EXECUTIONER_MOVING);
-            return PlayState.CONTINUE;
+            if (horizontalSpeed > 0.25f) {
+                event.getController().setAnimationSpeed(this.walkAnimation.speed() * 2.5f);
+            } else event.getController().setAnimationSpeed(1);
+        } else {
+            event.getController().setAnimation(EXECUTIONER_IDLE);
         }
+        return PlayState.CONTINUE;
     }
 
     private PlayState deadPredicate(software.bernie.geckolib.animation.AnimationState event) {
@@ -389,7 +388,6 @@ public class JadeExecutionerEntity extends AbstractSpellCastingMob implements Ge
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(showdownController);
-        controllerRegistrar.add(idleController);
         controllerRegistrar.add(movingController);
         controllerRegistrar.add(deadController);
         controllerRegistrar.add(combatController);

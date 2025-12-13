@@ -19,6 +19,7 @@ import net.warphan.iss_magicfromtheeast.damage.MFTEDamageTypes;
 import net.warphan.iss_magicfromtheeast.registries.MFTEItemRegistries;
 import net.warphan.iss_magicfromtheeast.registries.MFTESchoolRegistries;
 import net.warphan.iss_magicfromtheeast.setup.MFTERarity;
+import net.warphan.iss_magicfromtheeast.util.MFTEParticleHelper;
 
 @EventBusSubscriber
 public class JadePendant extends PassiveAbilityCurio {
@@ -46,6 +47,7 @@ public class JadePendant extends PassiveAbilityCurio {
                 //reflection visual
                 if (!level.isClientSide) {
                     MagicManager.spawnParticles(level, new BlastwaveParticleOptions(MFTESchoolRegistries.SYMMETRY.get().getTargetingColor(), RADIUS), vec3.x, vec3.y + .165f, vec3.z, 1, 0, 0, 0, 0, true);
+                    MagicManager.spawnParticles(level, MFTEParticleHelper.JADE_SHATTER, vec3.x, vec3.y, vec3.z, 8, 0.2, 0.2, 0.2, 0.3, false);
                 }
                 level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundRegistry.ECHOING_STRIKE, SoundSource.NEUTRAL, 1.0f, 1.0f);
 

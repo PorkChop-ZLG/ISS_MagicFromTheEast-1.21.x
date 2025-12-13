@@ -6,6 +6,7 @@ import io.redspace.ironsspellbooks.network.SyncAnimationPacket;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -29,16 +30,24 @@ public class BoneHandAttackGoal extends WarlockAttackGoal {
     int meleeAnimTimer = -1;
     public BoneHandsEntity.AttackAnim attack;
     float meleeRange = 9.0f;
+    float watchRange = 12.0f;
 
     @Override
     protected void handleAttackLogic(double distanceSquared) {
         float distance = Mth.sqrt((float) distanceSquared);
-        mob.getLookControl().setLookAt(target);
+        if (target != null) {
+            mob.getLookControl().setLookAt(target);
+        }
         if (distance > meleeRange) {
             if (mob instanceof BoneHandsEntity boneHands) {
                 boneHands.stopAnimationAttack();
             }
-            forceFaceTarget();
+            if (distance < watchRange) {
+                forceFaceTarget();
+            } else if (distance > watchRange) {
+                mob.setTarget(null);
+                mob.getBrain().eraseMemory(MemoryModuleType.ATTACK_TARGET);
+            }
             meleeAnimTimer = 0;
         } else if (distance <= meleeRange) {
             if (mob instanceof BoneHandsEntity boneHands) {

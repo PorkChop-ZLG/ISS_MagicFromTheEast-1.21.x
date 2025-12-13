@@ -45,4 +45,12 @@ public class MFTEEnchantmentHelper extends EnchantmentHelper {
         });
         return mutableFloat.intValue();
     }
+
+//    public static float processProjectileBarrage(ServerLevel serverLevel, ItemStack stack, Entity entity, float f) {
+//        MutableFloat mutableFloat = new MutableFloat(f);
+//        runIterationOnItem(stack, (enchantmentHolder, i) -> {
+//            ((Enchantment) enchantmentHolder.value()).modifyEntityFilteredValue(MFTEDataComponentRegistries.BARRAGE_SHOT.get(), serverLevel, i, stack, entity, mutableFloat);
+//        });
+//        return Math.max(0.0F, mutableFloat.floatValue());
+//    }
 }

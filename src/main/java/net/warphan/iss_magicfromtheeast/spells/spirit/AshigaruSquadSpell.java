@@ -114,7 +114,7 @@ public class AshigaruSquadSpell extends AbstractSpell {
             for (int i = 0; i < spellLevel; i++) {
                 SpiritAshigaruEntity ashigaru = new SpiritAshigaruEntity(world, entity, true);
 
-                if (i % 3 == 0) {
+                if ((i + 1) % 3 == 0) {
                     ashigaru.setRangeType();
                     ashigaru.getAttributes().getInstance(Attributes.ENTITY_INTERACTION_RANGE).setBaseValue(25.0);
                 } else ashigaru.setMeleeType();

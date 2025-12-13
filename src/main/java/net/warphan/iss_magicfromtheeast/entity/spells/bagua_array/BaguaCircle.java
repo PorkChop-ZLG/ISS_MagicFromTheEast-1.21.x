@@ -5,6 +5,7 @@ import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.mobs.AntiMagicSusceptible;
 import io.redspace.ironsspellbooks.entity.spells.AoeEntity;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -17,6 +18,7 @@ import net.minecraft.world.phys.Vec3;
 import net.warphan.iss_magicfromtheeast.registries.MFTEEffectRegistries;
 import net.warphan.iss_magicfromtheeast.registries.MFTEEntityRegistries;
 import net.warphan.iss_magicfromtheeast.registries.MFTESpellRegistries;
+import net.warphan.iss_magicfromtheeast.util.MFTEParticleHelper;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -71,17 +73,13 @@ public class BaguaCircle extends AoeEntity implements GeoEntity, AntiMagicSuscep
         return;
     }
     @Override
-    public void ambientParticles() {
-        return;
-    }
-    @Override
     public float getParticleCount() {
-        return 0;
+        return 0.125f;
     }
 
     @Override
     public Optional<ParticleOptions> getParticle() {
-        return Optional.empty();
+        return Optional.of(MFTEParticleHelper.JADE_SHATTER);
     }
 
     @Override

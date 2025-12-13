@@ -20,6 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.PartEntity;
 import net.warphan.iss_magicfromtheeast.registries.MFTEEntityRegistries;
+import net.warphan.iss_magicfromtheeast.util.MFTEParticleHelper;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
@@ -107,7 +108,8 @@ public class JadeDrapesEntity extends AbstractShieldEntity implements GeoEntity,
         if (!this.isInvulnerableTo(source)) {
             this.setHealth(this.getHealth() - amount);
             if (!level().isClientSide && location != null) {
-                MagicManager.spawnParticles(level(), ParticleTypes.SCRAPE, location.x, location.y, location.z, 10, .1, .1, .1, .5, false);
+                MagicManager.spawnParticles(level(), ParticleTypes.SCRAPE, location.x, location.y, location.z, 8, .1, .1, .1, .5, false);
+                MagicManager.spawnParticles(level(), MFTEParticleHelper.JADE_SHATTER, location.x, location.y, location.z, 3, .1, .1, .1, .3, false);
                 level().playSound(null, location.x, location.y, location.z, SoundRegistry.FORCE_IMPACT.get(), SoundSource.NEUTRAL, .8f, 1f);
             }
         }

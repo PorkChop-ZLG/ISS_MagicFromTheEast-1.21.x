@@ -32,11 +32,11 @@ public class PhantomChargeSpell extends AbstractSpell {
             .build();
 
     public PhantomChargeSpell() {
-        this.manaCostPerLevel = 45;
+        this.manaCostPerLevel = 15;
         this.baseSpellPower = 6;
         this.spellPowerPerLevel = 2;
         this.castTime = 0;
-        this.baseManaCost = 70;
+        this.baseManaCost = 45;
     }
 
     @Override

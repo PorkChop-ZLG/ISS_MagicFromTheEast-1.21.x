@@ -15,7 +15,7 @@ import net.warphan.iss_magicfromtheeast.ISS_MagicFromTheEast;
 
 import java.util.function.Supplier;
 
-@EventBusSubscriber(modid = ISS_MagicFromTheEast.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ISS_MagicFromTheEast.MOD_ID)
 public class MFTEAttributeRegistries {
 
     private static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, ISS_MagicFromTheEast.MOD_ID);

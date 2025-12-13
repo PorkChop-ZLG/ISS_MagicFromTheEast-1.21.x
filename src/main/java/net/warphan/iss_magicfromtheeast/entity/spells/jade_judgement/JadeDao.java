@@ -9,6 +9,7 @@ import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.ironsspellbooks.particle.SparkParticleOptions;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -26,7 +27,9 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.warphan.iss_magicfromtheeast.registries.MFTEEntityRegistries;
 import net.warphan.iss_magicfromtheeast.registries.MFTESchoolRegistries;
+import net.warphan.iss_magicfromtheeast.registries.MFTESoundRegistries;
 import net.warphan.iss_magicfromtheeast.registries.MFTESpellRegistries;
+import net.warphan.iss_magicfromtheeast.util.MFTEParticleHelper;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -122,7 +125,7 @@ public class JadeDao extends AbstractMagicProjectile implements GeoEntity {
             return;
         if (!canHitEntity(target) || targets.contains(target))
             return;
-        boolean flag = DamageSources.applyDamage(target, getDamage() / 4 * 1, MFTESpellRegistries.JADE_JUDGEMENT_SPELL.get().getDamageSource(this, getOwner()));
+        boolean flag = DamageSources.applyDamage(target, getDamage() * 0.25f, MFTESpellRegistries.JADE_JUDGEMENT_SPELL.get().getDamageSource(this, getOwner()));
         if (flag) {
             targets.add(target);
             target.invulnerableTime = 0;
@@ -158,7 +161,7 @@ public class JadeDao extends AbstractMagicProjectile implements GeoEntity {
             if (airTime <= 0) {
                 if (onGround()) {
                     doImpactDamage();
-                    this.playSound(SoundEvents.TRIDENT_THUNDER.value(), 8, .65f);
+                    this.playSound(MFTESoundRegistries.JADE_DAO_IMPACT.value(), 8, 7.5f);
                     impactParticles(getX(), getY(), getZ());
                     discard();
                 } else {
@@ -223,8 +226,9 @@ public class JadeDao extends AbstractMagicProjectile implements GeoEntity {
     public void impactParticles(double x, double y, double z) {
         MagicManager.spawnParticles(level, new BlastwaveParticleOptions(MFTESchoolRegistries.SYMMETRY.get().getTargetingColor(), 5f), x, y + .165f, z, 1, 0, 0, 0, 0, true);
         MagicManager.spawnParticles(level, new SparkParticleOptions(MFTESchoolRegistries.SYMMETRY.get().getTargetingColor()), x, y + 0.1, z, 30, .08, 1.0, .08, 0.3, false);
-        MagicManager.spawnParticles(level, ParticleTypes.SCRAPE, x, y + 0.1, z, 60, 2.0, .2, 2.0, 0.5, false);
-        MagicManager.spawnParticles(level, ParticleTypes.GLOW, x, y + 0.1, z, 40, 1.5, .1, 1.5, 0.6, false);
+        MagicManager.spawnParticles(level, new DustParticleOptions(MFTESchoolRegistries.SYMMETRY.get().getTargetingColor(), 3f), x, y + 0.1, z, 60, 2.0, 1.0, 2.0, 0.5, false);
+        MagicManager.spawnParticles(level, ParticleTypes.GLOW, x, y + 0.1, z, 40, 1.5, .3, 1.5, 0.6, false);
+        MagicManager.spawnParticles(level, MFTEParticleHelper.JADE_SHATTER, x, y + 0.1, z, 25, 1.0, .1, 1.0, 0.4, false);
     }
 
     @Override

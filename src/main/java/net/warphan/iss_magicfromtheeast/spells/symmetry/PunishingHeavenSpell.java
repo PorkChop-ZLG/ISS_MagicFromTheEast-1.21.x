@@ -105,7 +105,7 @@ public class PunishingHeavenSpell extends AbstractSpell {
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
 
-        int summonTime = 20 * 60 * 5;
+        int summonTime = 20 * 60 * 3;
         var recast = playerMagicData.getPlayerRecasts();
 
         if (!recast.hasRecastForSpell(this)) {
@@ -143,7 +143,7 @@ public class PunishingHeavenSpell extends AbstractSpell {
     }
 
     private float getExecutionerArmor(int spellLevel, LivingEntity summoner) {
-        return (float) 10.0 + (spellLevel * 2);
+        return (float) 6.0 + (spellLevel * 2);
     }
 
     @Override

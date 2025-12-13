@@ -14,9 +14,9 @@ import net.warphan.iss_magicfromtheeast.registries.MFTESoundRegistries;
 public class SpiritAshigaruAttackGoal extends WarlockAttackGoal {
     final SpiritAshigaruEntity ashigaru;
 
-    public SpiritAshigaruAttackGoal(SpiritAshigaruEntity abstractSpellCastingMob, double pSpeedModifier, int minAttackInterval, int maxAttackInterval) {
-        super(abstractSpellCastingMob, pSpeedModifier, minAttackInterval, maxAttackInterval);
-        ashigaru = abstractSpellCastingMob;
+    public SpiritAshigaruAttackGoal(SpiritAshigaruEntity ashigaru, double pSpeedModifier, int minAttackInterval, int maxAttackInterval) {
+        super(ashigaru, pSpeedModifier, minAttackInterval, maxAttackInterval);
+        this.ashigaru = ashigaru;
         this.wantsToMelee = true;
     }
 
@@ -60,7 +60,7 @@ public class SpiritAshigaruAttackGoal extends WarlockAttackGoal {
                         SpiritBulletProjectile spiritBullet = new SpiritBulletProjectile(ashigaru.level, ashigaru);
                         spiritBullet.setPos(ashigaru.position().add(0, ashigaru.getEyeHeight() - spiritBullet.getBoundingBox().getYsize() * .5f,0).add(ashigaru.getForward()));
                         spiritBullet.shoot(ashigaru.getLookAngle());
-                        spiritBullet.setDamage((float) ashigaru.getAttributeValue(Attributes.ATTACK_DAMAGE));
+                        spiritBullet.setDamage((float) ashigaru.getAttributeValue(Attributes.ATTACK_DAMAGE) * 1.5f);
                         ashigaru.level.addFreshEntity(spiritBullet);
                         playShotSound();
                     }

@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 
 public class MFTEExtendedWeaponTier implements Tier, IronsWeaponTier {
 
-    public static MFTEExtendedWeaponTier JADE_GUANDAO = new MFTEExtendedWeaponTier(2031, 11, -2.5f, 12, BlockTags.INCORRECT_FOR_DIAMOND_TOOL, () -> Ingredient.of(MFTEItemRegistries.REFINED_JADE_INGOT.get()), new AttributeContainer(Attributes.ARMOR_TOUGHNESS, 1, AttributeModifier.Operation.ADD_VALUE));
+    public static MFTEExtendedWeaponTier JADE_GUANDAO = new MFTEExtendedWeaponTier(2031, 11, -2.5f, 12, BlockTags.INCORRECT_FOR_DIAMOND_TOOL, () -> Ingredient.of(MFTEItemRegistries.REFINED_JADE_INGOT.get()), new AttributeContainer(Attributes.ARMOR_TOUGHNESS, 2, AttributeModifier.Operation.ADD_VALUE));
     public static MFTEExtendedWeaponTier SOUL_BREAKER = new MFTEExtendedWeaponTier(2031, 5, -2.5f, 12, BlockTags.INCORRECT_FOR_DIAMOND_TOOL, () -> Ingredient.of(MFTEItemRegistries.CRYSTALLIZED_SOUL.get()), new AttributeContainer(AttributeRegistry.SPELL_RESIST, 0.10, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     public static MFTEExtendedWeaponTier SPIRIT_CRUSHER = new MFTEExtendedWeaponTier(2031, 17, - 3.4f, 12, BlockTags.INCORRECT_FOR_DIAMOND_TOOL, () -> Ingredient.of(MFTEItemRegistries.CRYSTALLIZED_SOUL.get()),
             new AttributeContainer(AttributeRegistry.SPELL_RESIST, 0.20, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),

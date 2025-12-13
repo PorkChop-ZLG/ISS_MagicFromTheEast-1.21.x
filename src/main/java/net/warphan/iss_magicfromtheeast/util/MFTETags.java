@@ -15,7 +15,7 @@ public class MFTETags {
     public static final TagKey<Item> DUNE_FOCUS = ItemTags.create(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "dune_focus.json"));
 
     public static final TagKey<Item> SOULPIERCER = ItemTags.create(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "soulpiercer"));
-    public static final TagKey<Item> REPEATING_CROSSBOW = ItemTags.create(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "ammo_load_weapon"));
+    public static final TagKey<Item> AMMO_LOAD_WEAPON = ItemTags.create(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "ammo_load_weapon"));
     public static final TagKey<Item> SOUL_MELEE_WEAPON = ItemTags.create(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "melee_soul_weapon"));
 
     public static final TagKey<BannerPattern> BALANCE_PATTERN_ITEM = bannerTag("pattern_item/balance");

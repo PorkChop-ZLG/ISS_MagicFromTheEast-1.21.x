@@ -35,6 +35,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.warphan.iss_magicfromtheeast.ISS_MagicFromTheEast;
 import net.warphan.iss_magicfromtheeast.registries.MFTEEntityRegistries;
 import net.warphan.iss_magicfromtheeast.registries.MFTESoundRegistries;
 import net.warphan.iss_magicfromtheeast.registries.MFTESpellRegistries;
@@ -328,7 +329,7 @@ public class SpiritAshigaruEntity extends AbstractSpellCastingMob implements Geo
             var attackType = SpiritAshigaruEntity.AttackType.valueOf(animationID);
             animationToPlay = RawAnimation.begin().thenPlay(attackType.data.animationId);
         } catch (Exception ignore) {
-            IronsSpellbooks.LOGGER.error("Entity {} Failed to play animation: {}", this, animationID);
+            ISS_MagicFromTheEast.LOGGER.error("Entity {} Failed to play animation: {}", this, animationID);
         }
     }
 

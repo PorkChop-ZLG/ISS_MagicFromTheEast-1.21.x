@@ -12,22 +12,25 @@ import net.warphan.iss_magicfromtheeast.ISS_MagicFromTheEast;
 import net.warphan.iss_magicfromtheeast.entity.mobs.bone_hands.BoneHandsEntity;
 import net.warphan.iss_magicfromtheeast.entity.mobs.jade_executioner.JadeExecutionerEntity;
 import net.warphan.iss_magicfromtheeast.entity.mobs.jiangshi.JiangshiEntity;
+import net.warphan.iss_magicfromtheeast.entity.mobs.jiangshi.SummonedJiangshiEntity;
 import net.warphan.iss_magicfromtheeast.entity.mobs.mfte_wizards.onmyoji.OnmyojiEntity;
 import net.warphan.iss_magicfromtheeast.entity.mobs.mfte_wizards.taoist.TaoistEntity;
 import net.warphan.iss_magicfromtheeast.entity.mobs.spirit_ashigaru.SpiritAshigaruEntity;
 import net.warphan.iss_magicfromtheeast.entity.mobs.spirit_samurai.SpiritSamuraiEntity;
+import net.warphan.iss_magicfromtheeast.entity.spells.anchoring_kunai.AnchoringKunaiProjectile;
 import net.warphan.iss_magicfromtheeast.entity.spells.bagua_array.BaguaCircle;
+import net.warphan.iss_magicfromtheeast.entity.spells.jade_bullet.JadeBulletProjectile;
 import net.warphan.iss_magicfromtheeast.entity.spells.jade_drape.JadeDrapesEntity;
 import net.warphan.iss_magicfromtheeast.entity.mobs.kitsune.SummonedKitsune;
+import net.warphan.iss_magicfromtheeast.entity.spells.nephrite_slash.NephriteCrystalEntity;
 import net.warphan.iss_magicfromtheeast.entity.spells.phantom_cavalry.PhantomCavalryVisualEntity;
-import net.warphan.iss_magicfromtheeast.entity.spells.qigong_controlling.PushZone;
 import net.warphan.iss_magicfromtheeast.entity.spells.dragon_glide.JadeLoong;
 import net.warphan.iss_magicfromtheeast.entity.spells.soul_skull.SoulSkullProjectile;
 import net.warphan.iss_magicfromtheeast.entity.spells.spirit_challenging.ExtractedSoul;
+import net.warphan.iss_magicfromtheeast.entity.spells.splitting_shuriken.SplittingShurikenProjectile;
 import net.warphan.iss_magicfromtheeast.entity.spells.summoned_cloud.SummonCloudEntity;
 import net.warphan.iss_magicfromtheeast.entity.spells.verdict_circle.VerdictCircle;
 import net.warphan.iss_magicfromtheeast.entity.spells.jade_judgement.JadeDao;
-import net.warphan.iss_magicfromtheeast.entity.spells.qigong_controlling.PullField;
 import net.warphan.iss_magicfromtheeast.entity.spells.sword_dance.JadeSword;
 import net.warphan.iss_magicfromtheeast.entity.spirit_arrow.SpiritArrow;
 import net.warphan.iss_magicfromtheeast.entity.spirit_bullet.SpiritBulletProjectile;
@@ -54,26 +57,21 @@ public class MFTEEntityRegistries {
                     .sized(0.8f, 4f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "jade_dao").toString()));
-    public static final DeferredHolder<EntityType<?>, EntityType<PullField>> PULL_FIELD =
-            MFTE_ENTITIES.register("pull_field", () -> EntityType.Builder.<PullField>of(PullField::new, MobCategory.MISC)
-                    .sized(1f, 1f)
-                    .clientTrackingRange(64)
-                    .build(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "pull_field").toString()));
-    public static final DeferredHolder<EntityType<?>, EntityType<PushZone>> PUSH_ZONE =
-            MFTE_ENTITIES.register("push_zone", () -> EntityType.Builder.<PushZone>of(PushZone::new, MobCategory.MISC)
-                    .sized(0.3f, 0.3f)
-                    .clientTrackingRange(64)
-                    .build(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "push_zone").toString()));
     public static final DeferredHolder<EntityType<?>, EntityType<JadeSword>> JADE_SWORD =
             MFTE_ENTITIES.register("jade_sword", () -> EntityType.Builder.<JadeSword>of(JadeSword::new, MobCategory.MISC)
                     .sized(0.3f, 0.3f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "jade_sword").toString()));
-    public static final DeferredHolder<EntityType<?>, EntityType<JiangshiEntity>> SUMMONED_JIANGSHI =
-            MFTE_ENTITIES.register("summoned_jiangshi", () -> EntityType.Builder.<JiangshiEntity>of(JiangshiEntity::new, MobCategory.MISC)
+    public static final DeferredHolder<EntityType<?>, EntityType<JiangshiEntity>> JIANGSHI =
+            MFTE_ENTITIES.register("jiangshi", () -> EntityType.Builder.<JiangshiEntity>of(JiangshiEntity::new, MobCategory.MONSTER)
                     .sized(.6f, 1.8f)
                     .clientTrackingRange(64)
-                    .build(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "summoned_jiangshi").toString()));
+                    .build(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "jiangshi").toString()));
+    public static final DeferredHolder<EntityType<?>, EntityType<SummonedJiangshiEntity>> SUMMONED_JIANGSHI =
+            MFTE_ENTITIES.register("summoned_jiangshi", () -> EntityType.Builder.<SummonedJiangshiEntity>of(SummonedJiangshiEntity::new, MobCategory.MISC)
+                    .sized(.6f, 1.8f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "jiangshi").toString()));
     public static final DeferredHolder<EntityType<?>, EntityType<VerdictCircle>> VERDICT_CIRCLE =
             MFTE_ENTITIES.register("impermanence", () -> EntityType.Builder.<VerdictCircle>of(VerdictCircle::new,MobCategory.MISC)
                     .sized(7f, 0.5f)
@@ -96,7 +94,7 @@ public class MFTEEntityRegistries {
                     .build(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "bone_hand").toString()));
     public static final DeferredHolder<EntityType<?>, EntityType<JadeExecutionerEntity>> JADE_EXECUTIONER =
             MFTE_ENTITIES.register("jade_executioner", () -> EntityType.Builder.<JadeExecutionerEntity>of(JadeExecutionerEntity::new, MobCategory.MISC)
-                    .sized(2.8f, 6.0f)
+                    .sized(2.5f, 5.5f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "jade_executioner").toString()));
     public static final DeferredHolder<EntityType<?>, EntityType<JadeDrapesEntity>> JADE_DRAPES_ENTITY =
@@ -142,6 +140,26 @@ public class MFTEEntityRegistries {
                     .sized(1.2f, 2.5f)
                     .clientTrackingRange(64)
                     .build(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "phantom_cavalry").toString()));
+    public static final DeferredHolder<EntityType<?>, EntityType<AnchoringKunaiProjectile>> ANCHORING_KUNAI =
+            MFTE_ENTITIES.register("anchoring_kunai", () -> EntityType.Builder.<AnchoringKunaiProjectile>of(AnchoringKunaiProjectile::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "anchoring_kunai").toString()));
+    public static final DeferredHolder<EntityType<?>, EntityType<SplittingShurikenProjectile>> SPIRIT_SHURIKEN =
+            MFTE_ENTITIES.register("spirit_shuriken", () -> EntityType.Builder.<SplittingShurikenProjectile>of(SplittingShurikenProjectile::new, MobCategory.MISC)
+                    .sized(.3f, .3f)
+                    .clientTrackingRange(64)
+                    .build(new ResourceLocation(ISS_MagicFromTheEast.MOD_ID, "spirit_shuriken").toString()));
+    public static final DeferredHolder<EntityType<?>, EntityType<NephriteCrystalEntity>> NEPHRITE_CRYSTAL =
+            MFTE_ENTITIES.register("nephrite_crystal", () -> EntityType.Builder.<NephriteCrystalEntity>of(NephriteCrystalEntity::new, MobCategory.MISC)
+                    .sized(0.4f, 0.7f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(ISS_MagicFromTheEast.MOD_ID, "nephrite_crystal").toString()));
+    public static final DeferredHolder<EntityType<?>, EntityType<JadeBulletProjectile>> JADE_PROJECTILE =
+            MFTE_ENTITIES.register("jade_projectile", () -> EntityType.Builder.<JadeBulletProjectile>of(JadeBulletProjectile::new, MobCategory.MISC)
+                    .sized(.4f, .4f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(ISS_MagicFromTheEast.MOD_ID, "jade_projectile").toString()));
 
     //MFTE WIZARDS
     public static final DeferredHolder<EntityType<?>, EntityType<TaoistEntity>> TAOIST =

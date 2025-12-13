@@ -19,7 +19,7 @@ public class JadeExecutionerRenderer extends GeoEntityRenderer<JadeExecutionerEn
 
     public JadeExecutionerRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new JadeExecutionerModel());
-        this.shadowRadius = 1.5f;
+        this.shadowRadius = 1.25f;
     }
 
     @Override
