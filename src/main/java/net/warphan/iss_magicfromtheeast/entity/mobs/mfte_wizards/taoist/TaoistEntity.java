@@ -216,7 +216,7 @@ public class TaoistEntity extends NeutralWizard implements IMerchantWizard {
     }
 
     private static final List<VillagerTrades.ItemListing> fillerOffers = List.of(
-            new AdditionalWanderingTrades.SimpleBuy(16, new ItemCost(MFTEItemRegistries.RAW_JADE.get(), 5), 1, 3),
+            new AdditionalWanderingTrades.SimpleBuy(16, new ItemCost(MFTEItemRegistries.JADE.get(), 5), 1, 3),
             new AdditionalWanderingTrades.SimpleSell(6, new ItemStack(MFTEItemRegistries.RED_STRING, 1), 8, 12),
             new AdditionalWanderingTrades.SimpleSell(8, new ItemStack(Items.FLINT, 3), 4, 7),
             new AdditionalWanderingTrades.SimpleSell(8, new ItemStack(Items.QUARTZ, 3), 6, 10),

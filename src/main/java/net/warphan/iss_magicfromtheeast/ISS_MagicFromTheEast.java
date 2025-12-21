@@ -33,7 +33,7 @@ public class ISS_MagicFromTheEast {
 
         MFTEItemRegistries.register(modEventBus);
         MFTEBlockRegistries.register(modEventBus);
-        CreativeTabRegistries.register(modEventBus);
+        MFTECreativeTabRegistries.register(modEventBus);
         MFTESchoolRegistries.register(modEventBus);
         MFTEAttributeRegistries.register(modEventBus);
         MFTESoundRegistries.register(modEventBus);
@@ -46,6 +46,7 @@ public class ISS_MagicFromTheEast {
         MFTEDataComponentRegistries.register(modEventBus);
         MFTELootRegistries.register(modEventBus);
         MFTEParticleRegistries.register(modEventBus);
+        MFTEFeaturesRegistries.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.SERVER, MFTEServerConfigs.SPEC, String.format("%s-server.toml", ISS_MagicFromTheEast.MOD_ID));
     }

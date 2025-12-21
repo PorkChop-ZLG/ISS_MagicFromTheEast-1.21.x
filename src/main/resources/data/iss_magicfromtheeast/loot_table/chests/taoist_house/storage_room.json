@@ -85,7 +85,7 @@
         {
           "type": "minecraft:item",
           "weight": 2,
-          "name": "iss_magicfromtheeast:raw_jade_block",
+          "name": "iss_magicfromtheeast:jade_block",
           "functions": [
             {
               "function": "minecraft:set_count",

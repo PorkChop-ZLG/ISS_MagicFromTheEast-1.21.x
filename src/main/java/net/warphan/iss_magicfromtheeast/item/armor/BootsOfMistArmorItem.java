@@ -20,7 +20,7 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import java.util.List;
 
 public class BootsOfMistArmorItem extends ImbuableChestplateArmorItem {
-    public static final int COOLDOWN_TICKS = 20 * 10;
+    public static final int COOLDOWN_TICKS = 20 * 15;
 
     public BootsOfMistArmorItem(Type type, Properties properties) {
         super(MFTEArmorMaterialRegistries.BOOTS_OF_MIST, type, properties,

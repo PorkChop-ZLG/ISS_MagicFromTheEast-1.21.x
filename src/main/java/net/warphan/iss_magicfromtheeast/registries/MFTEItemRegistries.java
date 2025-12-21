@@ -55,8 +55,6 @@ public class MFTEItemRegistries {
     public static final DeferredHolder<Item, Item> RED_SHAFT = ITEMS.register("red_shaft",
             () -> new Item(ItemPropertiesHelper.material()));
 
-    public static final DeferredHolder<Item, Item> RAW_JADE = ITEMS.register("raw_jade",
-            () -> new Item(ItemPropertiesHelper.material()));
     public static final DeferredHolder<Item,Item> REFINED_JADE_INGOT = ITEMS.register("refined_jade_ingot",
             () -> new Item(ItemPropertiesHelper.material().rarity(MFTERarity.JADELIGHT_RARITY_PROXY.getValue())));
     public static final DeferredHolder<Item, Item> CRYSTALLIZED_SOUL = ITEMS.register("crystallized_soul",
@@ -169,12 +167,36 @@ public class MFTEItemRegistries {
             () -> new BlockItem(MFTEBlockRegistries.JADE_ORE.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> JADE_ORE_DEEPSLATE_ITEM = ITEMS.register("deepslate_jade_ore",
             () -> new BlockItem(MFTEBlockRegistries.JADE_ORE_DEEPSLATE.get(), new Item.Properties()));
-    public static final DeferredHolder<Item, Item> RAW_JADE_BLOCK_ITEM = ITEMS.register("raw_jade_block",
-            () -> new BlockItem(MFTEBlockRegistries.RAW_JADE_BLOCK.get(), new Item.Properties()));
+
     public static final DeferredHolder<Item, Item> JADE_BLOCK_ITEM = ITEMS.register("jade_block",
             () -> new BlockItem(MFTEBlockRegistries.JADE_BLOCK.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> JADE_SLAB_ITEM = ITEMS.register("jade_slab",
+            () -> new BlockItem(MFTEBlockRegistries.JADE_SLAB.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> JADE_STAIR_ITEM = ITEMS.register("jade_stair",
+            () -> new BlockItem(MFTEBlockRegistries.JADE_STAIR.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> JADE_WALL_ITEM = ITEMS.register("jade_wall",
+            () -> new BlockItem(MFTEBlockRegistries.JADE_WALL.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> CHISELED_JADE = ITEMS.register("chiseled_jade",
+            () -> new BlockItem(MFTEBlockRegistries.CHISELED_JADE.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> JADE_LION_HEAD_BLOCK_ITEMS = ITEMS.register("jade_lion_head_block",
+            () -> new BlockItem(MFTEBlockRegistries.JADE_LION_HEAD_BLOCK.get(), new Item.Properties()));
+
+    public static final DeferredHolder<Item, Item> JADESTONE_BRICKS_ITEM = ITEMS.register("jadestone_bricks",
+            () -> new BlockItem(MFTEBlockRegistries.JADE_BRICK_BLOCK.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> JADESTONE_BRICKS_SLAB_ITEM = ITEMS.register("jadestone_bricks_slab",
+            () -> new BlockItem(MFTEBlockRegistries.JADE_BRICK_SLAB.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> JADESTONE_BRICKS_STAIR_ITEM = ITEMS.register("jadestone_bricks_stair",
+            () -> new BlockItem(MFTEBlockRegistries.JADE_BRICK_STAIR.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> JADESTONE_BRICKS_WALL_ITEM = ITEMS.register("jadestone_bricks_wall",
+            () -> new BlockItem(MFTEBlockRegistries.JADE_BRICK_WALL.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> CHISELED_JADESTONE_BRICKS_ITEMS = ITEMS.register("chiseled_jadestone_bricks",
+            () -> new BlockItem(MFTEBlockRegistries.CHISELED_JADE_BRICK.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> JADESTONE_BRICKS_PILLAR = ITEMS.register("jadestone_bricks_pillar",
+            () -> new BlockItem(MFTEBlockRegistries.JADE_BRICK_PILLAR.get(), new Item.Properties()));
+
     public static final DeferredHolder<Item, Item> REFINED_JADE_BLOCK_ITEM = ITEMS.register("refined_jade_block",
             () -> new BlockItem(MFTEBlockRegistries.REFINED_JADE_BLOCK.get(), new Item.Properties()));
+
     public static final DeferredHolder<Item, Item> VASE_OF_RICE_WINE = ITEMS.register("vase_rice_wine",
             () -> new BlockItem(MFTEBlockRegistries.RICE_WINE_VASE.get(), new Item.Properties().stacksTo(1)));
 

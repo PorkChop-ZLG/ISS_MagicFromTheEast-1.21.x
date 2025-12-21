@@ -10,13 +10,10 @@
     },
     {
       "item": "minecraft:bowl"
-    },
-    {
-      "item": "minecraft:bowl"
     }
   ],
   "result": {
-    "count": 3,
+    "count": 2,
     "id": "iss_magicfromtheeast:rice_wine_bottle"
   }
 }

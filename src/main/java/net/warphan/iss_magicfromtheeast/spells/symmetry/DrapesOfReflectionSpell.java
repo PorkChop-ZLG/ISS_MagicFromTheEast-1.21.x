@@ -37,8 +37,8 @@ public class DrapesOfReflectionSpell extends AbstractSpell {
 
     public DrapesOfReflectionSpell() {
         this.manaCostPerLevel = 6;
-        this.baseSpellPower = 3;
-        this.spellPowerPerLevel = 4;
+        this.baseSpellPower = 2;
+        this.spellPowerPerLevel = 2;
         this.baseManaCost = 35;
         this.castTime = 0;
     }
@@ -70,7 +70,7 @@ public class DrapesOfReflectionSpell extends AbstractSpell {
     }
 
     private float getDrapesHP(int spellLevel, LivingEntity caster) {
-        return 4 + getSpellPower(spellLevel, caster);
+        return 2 + getSpellPower(spellLevel, caster);
     }
 
     private float getDrapesReflectionPercent(int spellLevel, LivingEntity caster) {
