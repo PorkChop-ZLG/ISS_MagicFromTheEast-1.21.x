@@ -23,7 +23,8 @@ public class MFTEEffectRegistries{
         MFTE_MOB_EFFECT_DEFERRED_REGISTER.register(eventBus);
     }
 
-    public static final DeferredHolder<MobEffect, MobEffect> SUMMON_CLOUD_TIMER = MFTE_MOB_EFFECT_DEFERRED_REGISTER.register("summon_cloud_timer", () -> new MagicMobEffect(MobEffectCategory.BENEFICIAL, 0xbea925));
+    public static final DeferredHolder<MobEffect, MobEffect> CLOUD_BLESS_EFFECT = MFTE_MOB_EFFECT_DEFERRED_REGISTER.register("cloud_bless", () -> new MagicMobEffect(MobEffectCategory.BENEFICIAL, 0xbea925)
+            .addAttributeModifier(Attributes.SAFE_FALL_DISTANCE, ISS_MagicFromTheEast.id("mobeffect_cloud_bless"), 999, AttributeModifier.Operation.ADD_VALUE));
     public static final DeferredHolder<MobEffect, MobEffect> SOULBURN = MFTE_MOB_EFFECT_DEFERRED_REGISTER.register("soulburn", () -> new SoulburnEffect(MobEffectCategory.HARMFUL, 0x00ffff));
     public static final DeferredHolder<MobEffect, MobEffect> REVERSAL_HEALING = MFTE_MOB_EFFECT_DEFERRED_REGISTER.register("reversal_healing", () -> new ReversalHealingEffect(MobEffectCategory.BENEFICIAL, 0x00bb77)
             .addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, ISS_MagicFromTheEast.id("mobeffect_reversal_healing"), 0.05f, AttributeModifier.Operation.ADD_VALUE));

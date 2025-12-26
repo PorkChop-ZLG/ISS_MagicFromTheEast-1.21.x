@@ -218,8 +218,8 @@
 
   "effect.iss_magicfromtheeast.soulburn": "Soulburn",
   "effect.iss_magicfromtheeast.soulburn.description": "Burning victim's souls",
-  "effect.iss_magicfromtheeast.summon_cloud_timer": "Summon Cloud Timer",
-  "effect.iss_magicfromtheeast.summon_cloud_timer.description": "Displays the duration remaining until your magical cloud fade away",
+  "effect.iss_magicfromtheeast.cloud_bless": "Cloud Bless",
+  "effect.iss_magicfromtheeast.cloud_bless.description": "Prevent death from falling to the ground",
   "effect.iss_magicfromtheeast.reversal_healing": "Reversal Healing",
   "effect.iss_magicfromtheeast.reversal_healing.description": "Bypass incoming damage while heal yourself instead. Also gain 5% knock back resistance for per level of effect",
   "effect.iss_magicfromtheeast.mist_step": "Mist Step",

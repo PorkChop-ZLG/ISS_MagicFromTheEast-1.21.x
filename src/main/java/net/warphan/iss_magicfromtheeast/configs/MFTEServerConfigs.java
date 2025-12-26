@@ -17,8 +17,8 @@ public class MFTEServerConfigs {
         {
             BUILDER.push("Spells");
 
-            BUILDER.comment("The limit of damage Impermanence's Verdict spell can reach based on target's max health. Default: 0.4 (40% target's max health)");
-            IMPERMANENCE_LIMIT_PERCENT = BUILDER.worldRestart().define("impermanencePercentLimit", 0.4);
+            BUILDER.comment("The limit of damage Impermanence's Verdict spell can reach based on target's max health. Default: 0.2 (20% target's max health)");
+            IMPERMANENCE_LIMIT_PERCENT = BUILDER.worldRestart().define("impermanencePercentLimit", 0.2);
             BUILDER.comment("Allow player to use counterspell on extracted soul to skip the challenging. Default: false");
             PASS_CHALLENGING = BUILDER.worldRestart().define("passChallenging", false);
             BUILDER.pop();

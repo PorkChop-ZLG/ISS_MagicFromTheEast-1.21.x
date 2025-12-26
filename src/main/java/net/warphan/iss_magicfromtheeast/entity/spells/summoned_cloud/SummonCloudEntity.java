@@ -9,6 +9,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -16,6 +17,7 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.warphan.iss_magicfromtheeast.registries.MFTEEffectRegistries;
 import net.warphan.iss_magicfromtheeast.registries.MFTEEntityRegistries;
 import org.joml.Vector3f;
 
@@ -31,8 +33,6 @@ public class SummonCloudEntity extends PathfinderMob implements IMagicSummon {
         this(MFTEEntityRegistries.SUMMON_CLOUD_ENTITY.get(),level);
         setSummoner(caster);
     }
-
-    int livingTick = -1;
 
     @Override
     public void registerGoals() {
@@ -64,18 +64,15 @@ public class SummonCloudEntity extends PathfinderMob implements IMagicSummon {
 
     @Override
     public void tick() {
-        livingTick--;
-        if (livingTick == 0) {
-            this.discard();
-        }
         if (!level.isClientSide) {
             MagicManager.spawnParticles(level, new FogParticleOptions(new Vector3f(198 / 255f, 1f, 226 / 255f), 0.4f), this.getX(), this.getY() - 0.25f, this.getZ(), 1, 0.4, - 0.2, 0.4, 2.0, false);
+            var rider = this.getControllingPassenger();
+            if (rider != null && !rider.isDeadOrDying()) {
+                rider.addEffect(new MobEffectInstance(MFTEEffectRegistries.CLOUD_BLESS_EFFECT, 100, 0, false, false, true));
+            }
         }
-        super.tick();
-    }
 
-    public void setLivingTick(int livingTick) {
-        this.livingTick = livingTick;
+        super.tick();
     }
 
     //Summon Stuffs
