@@ -55,7 +55,7 @@ public class OnmyojiEntity extends NeutralWizard implements IMerchantWizard {
         this.goalSelector.addGoal(2, new WizardAttackGoal(this, 1.25f, 25, 50)
                 .setSpells(
                         //more spell will be added in the future
-                        List.of(MFTESpellRegistries.SOUL_CATALYST_SPELL.get(), MFTESpellRegistries.PHANTOM_CHARGE_SPELL.get()),
+                        List.of(MFTESpellRegistries.SOUL_CATALYST_SPELL.get(), MFTESpellRegistries.PHANTOM_CHARGE_SPELL.get(), MFTESpellRegistries.SPLITTING_SHURIKEN.get()),
                         List.of(MFTESpellRegistries.SPIRIT_CHALLENGING.get(), MFTESpellRegistries.SOUL_BURST_SPELL.get()),
                         List.of(),
                         List.of()
